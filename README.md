@@ -1,5 +1,5 @@
 # FirstEat
-![image](assests/DemoScreenshot.png)
+![image](assets/DemoScreenshot.png)
 
 [live site](https://firsteat.netlify.app/)
 
