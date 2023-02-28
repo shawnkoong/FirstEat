@@ -27,6 +27,8 @@ public class Order {
     @ElementCollection
     @CollectionTable(name = "ordered_quantities")
     private List<Integer> quantityOrdered;
+    @ManyToOne
+    private User user;
     
     public Order() {
     }
@@ -60,6 +62,14 @@ public class Order {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Item> getItemsOrdered() {

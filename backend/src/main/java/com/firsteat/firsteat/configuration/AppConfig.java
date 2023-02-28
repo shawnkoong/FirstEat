@@ -17,7 +17,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Configuration
 public class AppConfig {
-    
+
     @Autowired
     private UserRepository userRepository;
 

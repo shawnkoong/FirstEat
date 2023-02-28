@@ -31,12 +31,11 @@ public class User implements UserDetails{
     public User() {
     }
 
-    public User(String username, String password, String email) {
+    public User(String username, String password, String email, Role role) {
         this.username = username;
         this.password = password;
         this.email = email;
-        //TODO: change it so the role is not always customer
-        this.role = Role.CUSTOMER;
+        this.role = role;
     }
 
     public User(Long id, String username, String password, String email) {
