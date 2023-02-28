@@ -1,5 +1,5 @@
 import React, { useState }from "react";
-import { Autocomplete } from '@react-google-maps/api';
+import { Autocomplete, LoadScript } from '@react-google-maps/api';
 import { AppBar, Box, Toolbar, Typography, InputBase } from "@mui/material";
 
 const MapNavBar = ({ setCoordinates }) => {
@@ -20,11 +20,13 @@ const MapNavBar = ({ setCoordinates }) => {
                     FirstEat
                 </Typography>
                 <Box display="flex">
-                    <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
-                        <Box sx={{  position: 'relative', marginLeft: 0, width: '100%', borderRadius: '11px', bgcolor: 'white', mr: 3, ml: 0, width: '100%' }}>
-                            <InputBase placeholder="Search..." />
-                        </Box>
-                    </Autocomplete>
+                    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} libraries={['geometry', 'drawing', 'places']}>
+                        <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+                            <Box sx={{  position: 'relative', marginLeft: 0, width: '100%', borderRadius: '11px', bgcolor: 'white', mr: 3, ml: 0 }}>
+                                <InputBase placeholder="Search..." />
+                            </Box>
+                        </Autocomplete>
+                    </LoadScript>
                 </Box>
             </Toolbar>
         </AppBar>

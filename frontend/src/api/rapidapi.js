@@ -2,7 +2,7 @@ import axios from "axios";
 
 const URL = "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary";
 
-export const getData = async (sw, ne) => {
+export const getRapidApiData = async (sw, ne) => {
   try {
     if (sw) {
       const { data: { data } } = await axios.get(URL, {

@@ -1,7 +1,7 @@
-import React, { useEffect, useState, createRef } from "react";
+import React, { useEffect, useState } from "react";
 import { CssBaseline, Grid } from "@mui/material";
 
-import { getData } from "../../api";
+import { getRapidApiData } from "../../api/rapidapi";
 import MapNavBar from "../MapNavBar/MapNavBar";
 import List from "../List/List";
 import Map from "../Map/Map";
@@ -25,7 +25,7 @@ const Main = () => {
   useEffect(() => {
     if (bounds.sw) {
         setLoading(true);
-        getData(bounds.sw, bounds.ne).then((data) => {
+        getRapidApiData(bounds.sw, bounds.ne).then((data) => {
             //setting data and removing parts of the response that is not a restaurant
             setRestaurants(data?.filter((restaurant) => restaurant.address));
             setLoading(false);
