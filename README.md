@@ -1,5 +1,5 @@
 # FirstEat
-![image](https://user-images.githubusercontent.com/40903086/221738985-43a7a0a8-d13d-4a0f-b4fa-ab8a67c4e5c3.png)
+![image](assests/DemoScreenshot.png)
 
 [live site](https://firsteat.netlify.app/)
 
