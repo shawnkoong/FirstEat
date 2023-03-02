@@ -22,7 +22,7 @@ public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    private String username; //should get rid of username to make things simpler (ie no duplicate usernames) and only use email
     private String password;
     private String email;
     @Enumerated(EnumType.STRING)
