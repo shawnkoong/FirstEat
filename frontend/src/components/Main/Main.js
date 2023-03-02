@@ -41,7 +41,7 @@ const Main = () => {
         <Grid item xs={12} md={4}>
           <List restaurants={restaurants} loading={loading} child={child} />
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Map
             setCoordinates={setCoordinates}
             setBounds={setBounds}

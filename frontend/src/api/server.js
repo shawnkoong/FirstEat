@@ -1,0 +1,34 @@
+import axios from "axios";
+
+const urlPrefix = "http://localhost:8080/api";
+
+export const login = async (user) => {
+    try {
+        if (user) {
+            const response = await axios.post(`${urlPrefix}/auth/login`, user);
+            console.log(response);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const registerCustomer = async (user) => {
+    try {
+        if (user) {
+            const response = await axios.post(`${urlPrefix}/auth/register-customer`, user)
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const registerVendor = async (user) => {
+    try {
+        if (user) {
+            const response = await axios.post(`${urlPrefix}/auth/register-vendor`, user)
+        }        
+    } catch (error) {
+        console.log(error);
+    }
+}
