@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Paper, TextField, Button } from '@mui/material';
-import { registerCustomer } from '../api/server';
+import { registerVendor } from '../api/server';
 
 export const CreateAccountPage = () => {
 
@@ -20,7 +20,7 @@ export const CreateAccountPage = () => {
                         <TextField id="outlined-basic" label="e-mail" fullWidth variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)}/>
                         <TextField id="outlined-basic" label="password" fullWidth variant="outlined" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                         {/* should add another TextField to confirm and check password */}
-                        <Button variant="contained" onClick={registerCustomer({ username, password, email })}>
+                        <Button variant="contained" onClick={registerVendor({ username, password, email })}>
                             Submit
                         </Button>
                     </form>

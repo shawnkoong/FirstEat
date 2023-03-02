@@ -6,6 +6,7 @@ export const login = async (user) => {
     try {
         if (user) {
             const response = await axios.post(`${urlPrefix}/auth/login`, user);
+            //TODO - get JWT token and store it somehow (if using redux, add there??)
             console.log(response);
         }
     } catch (error) {
@@ -16,7 +17,7 @@ export const login = async (user) => {
 export const registerCustomer = async (user) => {
     try {
         if (user) {
-            const response = await axios.post(`${urlPrefix}/auth/register-customer`, user)
+            const response = await axios.post(`${urlPrefix}/auth/register-customer`, user);
         }
     } catch (error) {
         console.log(error);
@@ -26,7 +27,7 @@ export const registerCustomer = async (user) => {
 export const registerVendor = async (user) => {
     try {
         if (user) {
-            const response = await axios.post(`${urlPrefix}/auth/register-vendor`, user)
+            const response = await axios.post(`${urlPrefix}/auth/register-vendor`, user);
         }        
     } catch (error) {
         console.log(error);
