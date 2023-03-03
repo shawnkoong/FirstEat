@@ -15,7 +15,10 @@ public class Restaurant {
     private String name;
     private String address;
     @ManyToOne
-    private User user;
+    // need to add annotation so json doesn't include user information
+    private User user; // owner/vendor
+    // add latitude/longitude or somehow get it from the address
+    // add rating
 
     public Restaurant() {
     }

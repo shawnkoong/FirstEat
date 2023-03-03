@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// change for deployment
 const urlPrefix = "http://localhost:8080/api";
 
 export const login = async (user) => {
@@ -29,6 +30,15 @@ export const registerVendor = async (user) => {
         if (user) {
             const response = await axios.post(`${urlPrefix}/auth/register-vendor`, user);
         }        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getRestaurants = async () => {
+    try {
+        const restaurants = await axios.get(`${urlPrefix}/restaurants`);
+        return restaurants;
     } catch (error) {
         console.log(error);
     }
