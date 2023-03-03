@@ -25,7 +25,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, restaurants, setChild }) 
             lat={Number(restaurant.latitude)}
             lng={Number(restaurant.longitude)}
             key={i}
-            sx={{ position: 'absolute', transform: 'translate(-50%, -50%)', zIndex: 1, '&:hover': { zIndex: 2 } }}
+            sx={{ position: 'absolute', transform: 'translate(-50%, -50%)', cursor: 'pointer', zIndex: 1, '&:hover': { zIndex: 2 } }}
             >
               {!media
                 ? <LocationOnIcon color="primary" fontSize="large" />
