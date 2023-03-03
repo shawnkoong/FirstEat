@@ -4,6 +4,7 @@ import { AppBar, Toolbar, Typography, InputBase, Badge } from "@mui/material";
 import { styled, alpha } from '@mui/material/styles';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import SearchIcon from '@mui/icons-material/Search';
+import Cart from "../Cart/Cart";
 
 const LIBRARIES = ['geometry', 'drawing', 'places'];
 
@@ -56,6 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const MapNavBar = ({ setCoordinates }) => {
     const [autocomplete, setAutocomplete] = useState(null);
+    const [cartOpen, setCartOpen] = useState(false);
 
     const onLoad = (autoCompPlace) => setAutocomplete(autoCompPlace);
 
@@ -66,7 +68,7 @@ const MapNavBar = ({ setCoordinates }) => {
     }
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" height="80px">
             <Toolbar sx={{ display: 'flex', justifyContent: 'space-between'  }}>
                 <Typography variant="h5">
                     FirstEat
@@ -74,7 +76,7 @@ const MapNavBar = ({ setCoordinates }) => {
                 <SearchWrapper>
                     {/* replace badgeContent with redux later */}
                     <Badge badgeContent={2} color="error">
-                        <ShoppingBasketIcon />
+                        <ShoppingBasketIcon onClick={() => setCartOpen(!cartOpen)}/>
                     </Badge>
                     <Search>
                         <SearchIconWrapper>
@@ -88,6 +90,7 @@ const MapNavBar = ({ setCoordinates }) => {
                     </Search>
                 </SearchWrapper>
             </Toolbar>
+            {cartOpen && <Cart />}
         </AppBar>
     )
 }

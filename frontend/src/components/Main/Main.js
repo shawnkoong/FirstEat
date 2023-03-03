@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CssBaseline, Grid } from "@mui/material";
 
 import { getRapidApiData } from "../../api/rapidapi";
-import MapNavBar from "../MapNavBar/MapNavBar";
+import MapNavBar from "../NavBar/MapNavBar";
 import List from "../List/List";
 import Map from "../Map/Map";
 
