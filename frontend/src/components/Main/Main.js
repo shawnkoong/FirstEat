@@ -9,7 +9,7 @@ import { getRestaurants } from "../../api/server";
 
 const Main = () => {
   const [restaurantsRapid, setRestaurantsRapid] = useState([]);
-  const [restuarantsServer, setRestaurantsServer] = useState([]);
+  const [restaurantsServer, setRestaurantsServer] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState({});
   const [loading, setLoading] = useState(false);
@@ -45,7 +45,7 @@ const Main = () => {
       <Grid container spacing={3} style={{ width: "100%" }}>
         <Grid item xs={12} md={4}>
           <List
-            restaurants={[...restuarantsServer, ...restaurantsRapid]}
+            restaurants={[...restaurantsServer, ...restaurantsRapid]}
             loading={loading}
             child={child}
           />
@@ -64,7 +64,7 @@ const Main = () => {
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}
-            restaurants={[...restuarantsServer, ...restaurantsRapid]}
+            restaurants={[...restaurantsServer, ...restaurantsRapid]}
             setChild={setChild}
           />
         </Grid>

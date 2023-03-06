@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { loginStart, loginSuccess, loginFailure } from "../store/userReducer"
 
 // change for deployment
@@ -15,6 +16,7 @@ export const login = async (dispatch, user) => {
          *  }
          */
         dispatch(loginSuccess(response.data.user));
+        localStorage.setItem('jwtToken', response.data.token);
     } catch (error) {
         dispatch(loginFailure());
     }
@@ -42,8 +44,12 @@ export const registerVendor = async (user) => {
 
 export const getRestaurants = async () => {
     try {
-        // add jwt info in the header
-        const restaurants = await axios.get(`${urlPrefix}/restaurants`);
+        // need fix
+        const restaurants = await axios.get(`${urlPrefix}/restaurants`, {
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+            }
+        });
         return restaurants;
     } catch (error) {
         console.log(error);

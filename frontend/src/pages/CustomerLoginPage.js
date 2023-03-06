@@ -1,7 +1,7 @@
 import { Button, Container, Link, Paper, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useNavigation } from 'react-router-dom';
 import { login } from '../api/server';
 
 // same as VendorLoginPage for now, can make the frame into another component. The difference will be an extra line at the bottom to sign in as either demo customer or demo vendor.
@@ -12,11 +12,12 @@ export const CustomerLoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {isFetching, error} = useSelector((state) => state.user);
     
     const handleLogin = (e) => {
         e.preventDefault();
-        login(dispatch, { username, password });
+        login(dispatch, { username, password }).then(navigate('/test'));
     }
 
     return (
