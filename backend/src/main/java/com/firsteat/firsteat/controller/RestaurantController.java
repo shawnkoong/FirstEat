@@ -24,6 +24,7 @@ public class RestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
+    // add request body for latitude/longitude
     @GetMapping("/")
     public List<Restaurant> getAllRestaurants() {
         return restaurantService.getAllRestaurants();

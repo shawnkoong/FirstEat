@@ -1,5 +1,6 @@
 import { Button, Container, Link, Paper, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api/server';
 
@@ -10,7 +11,13 @@ export const CustomerLoginPage = () => {
     // const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-  
+    const dispatch = useDispatch();
+    const {isFetching, error} = useSelector((state) => state.user);
+    
+    const handleLogin = (e) => {
+        e.preventDefault();
+        login(dispatch, { username, password });
+    }
 
     return (
         <Container>
@@ -22,10 +29,11 @@ export const CustomerLoginPage = () => {
                     <form autoCapitalize='off'>
                         <TextField label="Username" margin="normal" variant="outlined" value={username} onChange={(e) => setUsername(e.target.value)} />
                         <TextField label="Password" margin="normal" variant="outlined" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                        <Button variant="contained" onClick={(e) => login({ username, password })}>
+                        <Button variant="contained" onClick={handleLogin} disabled={isFetching}>
                             Sign In
                         </Button>
                     </form>
+                    {error && <Typography variant="subtitle1" color={"red"}>Invalid credentials</Typography>}
                     <Typography variant="subtitle1">
                         Don't have an account?
                     </Typography>

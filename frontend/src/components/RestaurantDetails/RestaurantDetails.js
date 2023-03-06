@@ -8,7 +8,7 @@ import {
   CardActions,
   CardContent,
   Chip,
-  Rating
+  Rating,
 } from "@mui/material";
 import LocationOn from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -37,28 +37,40 @@ const RestaurantDetails = ({ restaurant }) => {
         </Typography>
 
         {/* Rating information */}
-        <Box display="flex" justifyContent="space-between">
-        <Rating name="read-only" size="small" value={Number(restaurant.rating)} precision={0.1} readOnly />
-          <Typography gutterBottom variant="subtitle1">
-            out of {restaurant.num_reviews} reviews
-          </Typography>
-        </Box>
+        {restaurant.rating && (
+          <Box display="flex" justifyContent="space-between">
+            <Rating
+              name="read-only"
+              size="small"
+              value={Number(restaurant.rating)}
+              precision={0.1}
+              readOnly
+            />
+            <Typography gutterBottom variant="subtitle1">
+              out of {restaurant.num_reviews} reviews
+            </Typography>
+          </Box>
+        )}
 
         {/* Price information in $'s */}
-        <Box display="flex" justifyContent="space-between">
-          <Typography variant="subtitle1">Price</Typography>
-          <Typography gutterBottom variant="subtitle1">
-            {restaurant.price_level}
-          </Typography>
-        </Box>
+        {restaurant.price_level && (
+          <Box display="flex" justifyContent="space-between">
+            <Typography variant="subtitle1">Price</Typography>
+            <Typography gutterBottom variant="subtitle1">
+              {restaurant.price_level}
+            </Typography>
+          </Box>
+        )}
 
-        {/* Ranking information in $'s */}
-        <Box display="flex" justifyContent="space-between">
-          <Typography variant="subtitle1">Ranking</Typography>
-          <Typography gutterBottom variant="subtitle1">
-            {restaurant.ranking}
-          </Typography>
-        </Box>
+        {/* Ranking information */}
+        {restaurant.ranking && (
+          <Box display="flex" justifyContent="space-between">
+            <Typography variant="subtitle1">Ranking</Typography>
+            <Typography gutterBottom variant="subtitle1">
+              {restaurant.ranking}
+            </Typography>
+          </Box>
+        )}
 
         {/* Cuisine information */}
         {restaurant?.cuisine?.map(({ name }) => (
@@ -96,20 +108,22 @@ const RestaurantDetails = ({ restaurant }) => {
         )}
 
         <CardActions>
-          <Button
-            size="small"
-            color="primary"
-            onClick={() => window.open(restaurant.web_url, "_blank")}
-          >
-            Trip Advisor
-          </Button>
+          {restaurant.web_url && (
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => window.open(restaurant.web_url, "_blank")}
+            >
+              Trip Advisor
+            </Button>
+          )}
           {restaurant.website && (
             <Button
-                size="small"
-                color="primary"
-                onClick={() => window.open(restaurant.website, "_blank")}
+              size="small"
+              color="primary"
+              onClick={() => window.open(restaurant.website, "_blank")}
             >
-            Website
+              Website
             </Button>
           )}
         </CardActions>

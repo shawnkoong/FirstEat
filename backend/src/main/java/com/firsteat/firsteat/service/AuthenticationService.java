@@ -34,7 +34,7 @@ public class AuthenticationService {
         );
         userService.addUser(user);
         String token = jwtUtil.generateToken(user);
-        return new AuthenticationResponse(token);
+        return new AuthenticationResponse(token, user);
     }
 
     public AuthenticationResponse registerVendor(RegisterRequest request) {
@@ -46,7 +46,7 @@ public class AuthenticationService {
         );
         userService.addUser(user);
         String token = jwtUtil.generateToken(user);
-        return new AuthenticationResponse(token);
+        return new AuthenticationResponse(token, user);
     }
 
     public AuthenticationResponse login(LoginRequest request) {
@@ -55,6 +55,6 @@ public class AuthenticationService {
         );
         User user = userService.getUserWithUsername(request.getUsername());
         String token = jwtUtil.generateToken(user);
-        return new AuthenticationResponse(token);
+        return new AuthenticationResponse(token, user);
     }
 }

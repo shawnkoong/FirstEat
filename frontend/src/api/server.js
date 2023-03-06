@@ -1,17 +1,22 @@
 import axios from "axios";
+import { loginStart, loginSuccess, loginFailure } from "../store/userReducer"
 
 // change for deployment
 const urlPrefix = "http://localhost:8080/api";
 
-export const login = async (user) => {
+export const login = async (dispatch, user) => {
+    dispatch(loginStart());
     try {
-        if (user) {
-            const response = await axios.post(`${urlPrefix}/auth/login`, user);
-            //TODO - get JWT token and store it somehow (if using redux, add there??)
-            console.log(response);
-        }
+        const response = await axios.post(`${urlPrefix}/auth/login`, user);
+        /**
+         * response.data: {
+         *      token:  jwet token
+         *      user:   user object without password
+         *  }
+         */
+        dispatch(loginSuccess(response.data.user));
     } catch (error) {
-        console.log(error);
+        dispatch(loginFailure());
     }
 }
 
@@ -37,6 +42,7 @@ export const registerVendor = async (user) => {
 
 export const getRestaurants = async () => {
     try {
+        // add jwt info in the header
         const restaurants = await axios.get(`${urlPrefix}/restaurants`);
         return restaurants;
     } catch (error) {

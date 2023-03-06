@@ -1,5 +1,7 @@
 package com.firsteat.firsteat.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,8 +17,9 @@ public class Restaurant {
     private String name;
     private String address;
     @ManyToOne
-    // need to add annotation so json doesn't include user information
+    @JsonIgnore
     private User user; // owner/vendor
+    private String photo;
     // add latitude/longitude or somehow get it from the address
     // add rating
 
@@ -68,6 +71,14 @@ public class Restaurant {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getPhoto() {
+        return this.photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
 }
