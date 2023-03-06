@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -24,6 +25,7 @@ public class User implements UserDetails{
     private Long id;
     private String username; //should get rid of username to make things simpler (ie no duplicate usernames) and only use email
     private String password;
+    @Column(unique = true)
     private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
