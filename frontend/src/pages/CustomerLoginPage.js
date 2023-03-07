@@ -1,4 +1,4 @@
-import { Button, Container, Link, Paper, TextField, Typography } from '@mui/material';
+import { Button, Container, Link, Paper, TextField, Typography, Box } from '@mui/material';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useNavigation } from 'react-router-dom';
@@ -15,9 +15,15 @@ export const CustomerLoginPage = () => {
     const navigate = useNavigate();
     const {isFetching, error} = useSelector((state) => state.user);
     
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        login(dispatch, { username, password }).then(navigate('/test'));
+        try {
+            await login(dispatch, { username, password });
+            console.log("navigating to test")
+            navigate("/test");
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -28,17 +34,19 @@ export const CustomerLoginPage = () => {
                 </Typography>
                 <Paper elevation={6}>
                     <form autoCapitalize='off'>
-                        <TextField label="Username" margin="normal" variant="outlined" value={username} onChange={(e) => setUsername(e.target.value)} />
-                        <TextField label="Password" margin="normal" variant="outlined" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                        <Button variant="contained" onClick={handleLogin} disabled={isFetching}>
-                            Sign In
-                        </Button>
+                        <Box display="flex" flexDirection="column">
+                            <TextField label="Username" margin="normal" variant="outlined" value={username} onChange={(e) => setUsername(e.target.value)} />
+                            <TextField label="Password" margin="normal" variant="outlined" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <Button variant="contained" onClick={handleLogin} disabled={isFetching}>
+                                Sign In
+                            </Button>
+                        </Box>
                     </form>
                     {error && <Typography variant="subtitle1" color={"red"}>Invalid credentials</Typography>}
                     <Typography variant="subtitle1">
                         Don't have an account?
                     </Typography>
-                    <Link href="">
+                    <Link href="/register-customer">
                         Register
                     </Link>
                 </Paper>

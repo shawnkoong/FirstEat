@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { loginStart, loginSuccess, loginFailure } from "../store/userReducer"
+import { setToken } from "../store/authReducer";
 
 // change for deployment
 const urlPrefix = "http://localhost:8080/api";
@@ -16,7 +16,7 @@ export const login = async (dispatch, user) => {
          *  }
          */
         dispatch(loginSuccess(response.data.user));
-        localStorage.setItem('jwtToken', response.data.token);
+        dispatch(setToken(response.data.token));
     } catch (error) {
         dispatch(loginFailure());
     }
@@ -44,10 +44,10 @@ export const registerVendor = async (user) => {
 
 export const getRestaurants = async () => {
     try {
-        // need fix
+        // need fix (could be just surrounding Authorization with double quotes?)
         const restaurants = await axios.get(`${urlPrefix}/restaurants`, {
             headers:{
-                Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                "Authorization": `Bearer ${localStorage.getItem('jwtToken')}`
             }
         });
         return restaurants;

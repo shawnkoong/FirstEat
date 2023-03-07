@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Paper, TextField, Button } from "@mui/material";
 import { registerCustomer } from "../api/server";
 
-export const CreateAccountPage = () => {
+export const CreateCustomerPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -25,7 +25,7 @@ export const CreateAccountPage = () => {
           <form className="NewAccountForm" autoComplete="off">
             <TextField
               id="outlined-basic"
-              label="username"
+              label="Username"
               fullWidth
               variant="outlined"
               required
@@ -34,7 +34,7 @@ export const CreateAccountPage = () => {
             />
             <TextField
               id="outlined-basic"
-              label="e-mail"
+              label="E-mail"
               fullWidth
               variant="outlined"
               required
@@ -43,7 +43,7 @@ export const CreateAccountPage = () => {
             />
             <TextField
               id="outlined-basic"
-              label="password"
+              label="Password"
               fullWidth
               variant="outlined"
               required
@@ -53,7 +53,7 @@ export const CreateAccountPage = () => {
             />
             <TextField
               id="outlined-basic"
-              label="confirmPassword"
+              label="Confirm Password"
               fullWidth
               variant="outlined"
               required
