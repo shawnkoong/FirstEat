@@ -10,6 +10,7 @@ import { getRestaurants } from "../../api/server";
 const Main = () => {
   const [restaurantsRapid, setRestaurantsRapid] = useState([]);
   const [restaurantsServer, setRestaurantsServer] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState({});
   const [loading, setLoading] = useState(false);
@@ -27,14 +28,26 @@ const Main = () => {
   useEffect(() => {
     if (bounds.sw) {
       setLoading(true);
-      getRestaurants().then((data) => {
-        setRestaurantsServer(data?.filter((restaurant) => restaurant.address));
-      });
-      getRapidApiData(bounds.sw, bounds.ne).then((data) => {
-        //setting data and removing parts of the response that is not a restaurant
-        setRestaurantsRapid(data?.filter((restaurant) => restaurant.address));
+      // getRestaurants().then((data) => {
+      //   setRestaurantsServer(data?.filter((restaurant) => restaurant.address));
+      // });
+      // getRapidApiData(bounds.sw, bounds.ne).then((data) => {
+      //   //setting data and removing parts of the response that is not a restaurant
+      //   setRestaurantsRapid(data?.filter((restaurant) => restaurant.address));
+      //   setLoading(false);
+      // });
+      Promise.all(getRestaurants(), getRapidApiData()).then((data) => {
+        setRestaurants(data?.filter((restaurant) => restaurant.address));
         setLoading(false);
       });
+
+      /**
+       * could use promise all and just use one state: restaurants
+       * Promise.all(getRestaurants, getRapidApiData).then((data) => {
+       *    setRestaurants(data?.filter((restaurant) => restaurant.address));
+       *    setLoading(false);
+       * })
+       */
     }
   }, [bounds]);
 
@@ -45,7 +58,7 @@ const Main = () => {
       <Grid container spacing={3} style={{ width: "100%" }}>
         <Grid item xs={12} md={4}>
           <List
-            restaurants={[...restaurantsServer, ...restaurantsRapid]}
+            restaurants={restaurants}
             loading={loading}
             child={child}
           />
@@ -64,7 +77,7 @@ const Main = () => {
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}
-            restaurants={[...restaurantsServer, ...restaurantsRapid]}
+            restaurants={restaurants}
             setChild={setChild}
           />
         </Grid>

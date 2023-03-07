@@ -19,7 +19,6 @@ export const CustomerLoginPage = () => {
         e.preventDefault();
         try {
             await login(dispatch, { username, password });
-            console.log("navigating to test")
             navigate("/test");
         } catch (error) {
             console.log(error);
