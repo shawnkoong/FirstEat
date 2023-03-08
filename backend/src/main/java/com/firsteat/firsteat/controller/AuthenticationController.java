@@ -1,6 +1,7 @@
 package com.firsteat.firsteat.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,4 +38,10 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
     }
+
+    // @PostMapping("/token")
+    // public String token(Authentication authentication) {
+    //     String token = authService.generateToken(authentication);
+    //     return token;
+    // }
 }
