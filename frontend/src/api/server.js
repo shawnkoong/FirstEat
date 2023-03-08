@@ -47,7 +47,7 @@ export const registerVendor = async (dispatch, user) => {
 
 export const getRestaurants = async () => {
     try {
-        const restaurants = await axios.get(`${urlPrefix}/restaurants`);
+        const restaurants = await axios.get(`${urlPrefix}/restaurants/`);
         return restaurants;
     } catch (error) {
         console.log(error);
