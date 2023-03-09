@@ -5,6 +5,7 @@ import { styled, alpha } from '@mui/material/styles';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import SearchIcon from '@mui/icons-material/Search';
 import Cart from "../Cart/Cart";
+import { useSelector } from "react-redux";
 
 const LIBRARIES = ['geometry', 'drawing', 'places'];
 
@@ -58,6 +59,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const MapNavBar = ({ setCoordinates }) => {
     const [autocomplete, setAutocomplete] = useState(null);
     const [cartOpen, setCartOpen] = useState(false);
+    const cartCount = useSelector(state => state.cart.totalCount);
 
     const onLoad = (autoCompPlace) => setAutocomplete(autoCompPlace);
 
@@ -75,7 +77,7 @@ const MapNavBar = ({ setCoordinates }) => {
                 </Typography>
                 <SearchWrapper>
                     {/* replace badgeContent with redux later */}
-                    <Badge badgeContent={2} color="error">
+                    <Badge badgeContent={cartCount} color="error">
                         <ShoppingBasketIcon onClick={() => setCartOpen(!cartOpen)}/>
                     </Badge>
                     <Search>
