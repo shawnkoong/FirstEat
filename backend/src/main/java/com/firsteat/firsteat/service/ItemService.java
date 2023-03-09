@@ -2,7 +2,6 @@ package com.firsteat.firsteat.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.firsteat.firsteat.model.Item;
@@ -13,8 +12,11 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class ItemService {
     
-    @Autowired
-    private ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
+
+    public ItemService(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
     
     public Item getItem(String name) {
         return itemRepository.findById(name).orElseThrow(() -> new EntityNotFoundException());

@@ -4,7 +4,6 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,16 +22,22 @@ import com.firsteat.firsteat.model.User;
 
 @Service
 public class AuthenticationService {
-    
-    // should change all to constructor injection
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private AuthenticationManager authManager;
-    @Autowired
-    private JwtEncoder encoder;
+
+
+    private final UserService userService;
+
+    private final PasswordEncoder passwordEncoder;
+
+    private final AuthenticationManager authManager;
+
+    private final JwtEncoder encoder;
+
+    public AuthenticationService(UserService userService, PasswordEncoder passwordEncoder, AuthenticationManager authManager, JwtEncoder encoder) {
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+        this.authManager = authManager;
+        this.encoder = encoder;
+    }
 
     public AuthenticationResponse registerCustomer(RegisterRequest request) {
         User user = new User(

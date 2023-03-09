@@ -13,16 +13,19 @@ public class Item {
     private String imageURL;
     @ManyToOne
     private Restaurant restaurant;
+    @ManyToOne
+    private MenuCategory menuCategory;
 
     public Item() {
     }
 
-    public Item(String name, int price, String imageURL, Long restaurantId) {
+    public Item(String name, int price, String imageURL, Long restaurantId, Long menuCategoryId) {
         super();
         this.name = name;
         this.price = price;
         this.imageURL = imageURL;
-        this.restaurant = new Restaurant(restaurantId, "", "", 0L);
+        this.restaurant = new Restaurant(restaurantId);
+        this.menuCategory = new MenuCategory(restaurant);
     }
 
     public String getName() {
@@ -55,6 +58,14 @@ public class Item {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public MenuCategory getMenuCategory() {
+        return this.menuCategory;
+    }
+
+    public void setMenuCategory(MenuCategory menuCategory) {
+        this.menuCategory = menuCategory;
     }
 
 }

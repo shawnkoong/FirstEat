@@ -2,7 +2,6 @@ package com.firsteat.firsteat.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -15,8 +14,11 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class RestaurantService {
     
-    @Autowired
-    private RestaurantRepository restaurantRepository;
+    private final RestaurantRepository restaurantRepository;
+
+    public RestaurantService(RestaurantRepository restaurantRepository) {
+        this.restaurantRepository = restaurantRepository;
+    }
 
     public Restaurant getRestaurant(Long id) {
         return restaurantRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());

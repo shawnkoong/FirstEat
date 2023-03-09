@@ -27,6 +27,11 @@ public class Restaurant {
     public Restaurant() {
     }
 
+    public Restaurant(Long id) {
+        super();
+        this.id = id;
+    }
+
     public Restaurant(Long id, String name, String address, Long userId) {
         super();
         this.id = id;
