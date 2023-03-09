@@ -25,6 +25,16 @@ export const CustomerLoginPage = () => {
         }
     }
 
+    const demoLogin = async (e) => {
+        e.preventDefault();
+        try {
+            await login(dispatch, { username: "demo", password: "password"});
+            navigate("/map");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <Container>
             <Paper elevation={3}>
@@ -38,6 +48,9 @@ export const CustomerLoginPage = () => {
                             <TextField label="Password" margin="normal" variant="outlined" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                             <Button variant="contained" onClick={handleLogin} disabled={isFetching}>
                                 Sign In
+                            </Button>
+                            <Button variant="contained" onClick={demoLogin} disabled={isFetching}>
+                                Sign In as Demo User
                             </Button>
                         </Box>
                     </form>

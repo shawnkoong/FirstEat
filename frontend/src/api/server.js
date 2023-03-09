@@ -1,16 +1,12 @@
 import axios from "axios";
 import { loginStart, loginSuccess, loginFailure } from "../store/userReducer"
 import { setToken } from "../store/authReducer";
-import { useSelector } from "react-redux";
-import { store } from "../store/store";
-
-// change for deployment
-const urlPrefix = "http://localhost:8080/api";
+import axiosInstance from "./axiosInstance";
 
 export const login = async (dispatch, user) => {
     dispatch(loginStart());
     try {
-        const response = await axios.post(`${urlPrefix}/auth/login`, user);
+        const response = await axiosInstance.post(`/auth/login`, user);
         /**
          * response.data: {
          *      token:  jwet token
@@ -19,7 +15,6 @@ export const login = async (dispatch, user) => {
          */
         dispatch(loginSuccess(response.data.user));
         dispatch(setToken(response.data.token));
-        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
     } catch (error) {
         dispatch(loginFailure());
     }
@@ -27,7 +22,7 @@ export const login = async (dispatch, user) => {
 
 export const registerCustomer = async (dispatch, user) => {
     try {
-        const response = await axios.post(`${urlPrefix}/auth/register-customer`, user);
+        const response = await axiosInstance.post(`/auth/register-customer`, user);
         dispatch(loginSuccess(response.data.user));
         dispatch(setToken(response.data.token));
     } catch (error) {
@@ -37,9 +32,9 @@ export const registerCustomer = async (dispatch, user) => {
 
 export const registerVendor = async (dispatch, user) => {
     try {
-        const response = await axios.post(`${urlPrefix}/auth/register-vendor`, user);
+        const response = await axiosInstance.post(`/auth/register-vendor`, user);
         dispatch(loginSuccess(response.data.user));
-        dispatch(setToken(response.data.token));    
+        dispatch(setToken(response.data.token));   
     } catch (error) {
         console.log(error);
     }
@@ -47,7 +42,8 @@ export const registerVendor = async (dispatch, user) => {
 
 export const getRestaurants = async () => {
     try {
-        const restaurants = await axios.get(`${urlPrefix}/restaurants/`);
+        const restaurants = await axiosInstance.get(`/restaurants/`);
+        console.log(restaurants);
         return restaurants;
     } catch (error) {
         console.log(error);

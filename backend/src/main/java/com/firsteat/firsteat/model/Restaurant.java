@@ -22,6 +22,7 @@ public class Restaurant {
     private String photo;
     // add latitude/longitude or somehow get it from the address
     // add rating
+    // private List<String> cuisines;
 
     public Restaurant() {
     }

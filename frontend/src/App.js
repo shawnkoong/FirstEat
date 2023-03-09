@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Main from './components/Main/Main';
+import MapPage from './pages/MapPage';
 import { CreateCustomerPage } from './pages/CreateCustomerPage';
 import { CustomerLoginPage } from './pages/CustomerLoginPage';
 import { TestPage } from './pages/TestPage';
@@ -12,7 +12,7 @@ const App = () => {
             <Route exact path="/" element={<CustomerLoginPage />} />
             <Route exact path="/register-customer" element={<CreateCustomerPage />} />
             <Route element={<PrivateRoutes />}>
-                <Route exact path="/map" element={<Main />} />
+                <Route exact path="/map" element={<MapPage />} />
                 <Route exact path="/test" element={<TestPage />} />
             </Route>
         </Routes>

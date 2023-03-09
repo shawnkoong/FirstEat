@@ -53,7 +53,6 @@ public class SecurityConfig {
             .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authenticationProvider(authenticationProvider)
-            .formLogin(withDefaults())
             .httpBasic(withDefaults());
         return http.build();
     }
