@@ -36,6 +36,7 @@ const Cart = () => {
         padding: "20px",
         bgcolor: "white",
         boxShadow: "0px 0px 7px -5px rgba(0, 0, 0, 0.5)",
+        '&:hover': {cursor: 'pointer'}
       }}
     >
       <Typography variant="h3" sx={{ color: "black" }}>

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { CssBaseline, Grid } from "@mui/material";
 
 import { getRapidApiData } from "../../api/rapidapi";
+import { getRestaurants } from "../../api/server";
 import MapNavBar from "../NavBar/MapNavBar";
 import List from "../List/List";
 import Map from "../Map/Map";
-import { getRestaurants } from "../../api/server";
 
 const Main = () => {
   const [restaurantsRapid, setRestaurantsRapid] = useState([]);
@@ -31,15 +31,16 @@ const Main = () => {
       // getRestaurants().then((data) => {
       //   setRestaurantsServer(data?.filter((restaurant) => restaurant.address));
       // });
-      // getRapidApiData(bounds.sw, bounds.ne).then((data) => {
-      //   //setting data and removing parts of the response that is not a restaurant
-      //   setRestaurantsRapid(data?.filter((restaurant) => restaurant.address));
-      //   setLoading(false);
-      // });
-      Promise.all(getRestaurants(), getRapidApiData()).then((data) => {
+      getRapidApiData(bounds.sw, bounds.ne).then((data) => {
+        //setting data and removing parts of the response that is not a restaurant
+        console.log(data);
         setRestaurants(data?.filter((restaurant) => restaurant.address));
         setLoading(false);
       });
+      // Promise.all(getRestaurants(), getRapidApiData()).then((data) => {
+      //   setRestaurants(data?.filter((restaurant) => restaurant.address));
+      //   setLoading(false);
+      // });
 
       /**
        * could use promise all and just use one state: restaurants
