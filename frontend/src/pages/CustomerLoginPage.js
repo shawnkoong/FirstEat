@@ -29,7 +29,7 @@ export const CustomerLoginPage = () => {
         e.preventDefault();
         try {
             await login(dispatch, { username: "demo", password: "password"});
-            navigate("/map");
+            navigate("/test");
         } catch (error) {
             console.log(error);
         }
