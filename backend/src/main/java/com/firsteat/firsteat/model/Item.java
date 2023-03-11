@@ -1,31 +1,40 @@
 package com.firsteat.firsteat.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Item {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
-    private int price;
+    private int price; // could use BigDecimal instead
     private String imageURL;
-    @ManyToOne
-    private Restaurant restaurant;
-    @ManyToOne
+    private String description;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    @JsonBackReference
     private MenuCategory menuCategory;
 
     public Item() {
     }
 
-    public Item(String name, int price, String imageURL, Long restaurantId, Long menuCategoryId) {
+    public Item(String name, int price, String imageURL, String description, Long menuCategoryId) {
         super();
         this.name = name;
         this.price = price;
         this.imageURL = imageURL;
-        this.restaurant = new Restaurant(restaurantId);
-        this.menuCategory = new MenuCategory(restaurant);
+        this.description = description;
+        this.menuCategory = new MenuCategory(menuCategoryId);
     }
 
     public String getName() {
@@ -52,12 +61,12 @@ public class Item {
         this.imageURL = imageURL;
     }
 
-    public Restaurant getRestaurant() {
-        return this.restaurant;
+    public String getDescription() {
+        return this.description;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public MenuCategory getMenuCategory() {

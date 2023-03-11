@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.firsteat.firsteat.model.Item;
 
 public interface ItemRepository extends JpaRepository<Item, String> {
-    
-    public List<Item> findByRestaurantId(Long restaurantId);
+
+    public List<Item> findByMenuCategoryId(Long menuCategoryId);
 
 }

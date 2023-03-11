@@ -9,4 +9,5 @@ import com.firsteat.firsteat.model.MenuCategory;
 public interface MenuCategoryRepository extends JpaRepository<MenuCategory, Long> {
     
     public List<MenuCategory> findByRestaurantId(Long restaurantId);
+    
 }

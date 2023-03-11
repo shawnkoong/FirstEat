@@ -1,10 +1,17 @@
 package com.firsteat.firsteat.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class MenuCategory {
@@ -15,17 +22,31 @@ public class MenuCategory {
     private String name;
     @ManyToOne
     private Restaurant restaurant;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "menuCategory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Item> items;
 
     public MenuCategory() {
+        this.items = new ArrayList<>();
     }
 
     public MenuCategory(String name, Long restaurantId) {
+        super();
         this.name = name;
         this.restaurant = new Restaurant(restaurantId);
     }
 
-    public MenuCategory(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    // public MenuCategory(String name, Long restaurantId, List<Item> items) {
+    //     this.name = name;
+    //     this.restaurant = new Restaurant(restaurantId);
+    //     this.items = items;
+    //     for (Item item : items) {
+    //         item.setMenuCategory(this);
+    //     }
+    // }
+
+    public MenuCategory(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -50,5 +71,13 @@ public class MenuCategory {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public List<Item> getItems() {
+        return this.items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }

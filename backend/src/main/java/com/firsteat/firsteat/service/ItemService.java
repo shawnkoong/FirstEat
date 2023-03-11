@@ -1,7 +1,5 @@
 package com.firsteat.firsteat.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.firsteat.firsteat.model.Item;
@@ -20,10 +18,6 @@ public class ItemService {
     
     public Item getItem(String name) {
         return itemRepository.findById(name).orElseThrow(() -> new EntityNotFoundException());
-    }
-
-    public List<Item> getAllItems(Long restaurantId) {
-        return itemRepository.findByRestaurantId(restaurantId);
     }
 
     public void addItem(Item item) {
