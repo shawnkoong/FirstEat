@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +22,7 @@ public class MenuCategoryController {
     @Autowired
     private MenuCategoryService menuCategoryService;
 
-    @GetMapping("/{id}") // /api/menuCategory?id=
+    @GetMapping("/{id}")
     public ResponseEntity<MenuCategory> getMenuCategory(@PathVariable Long id) {
         MenuCategory menuCategory = menuCategoryService.getMenuCategory(id);
         return ResponseEntity.ok(menuCategory);
@@ -29,6 +31,11 @@ public class MenuCategoryController {
     @GetMapping() // /api/menuCategory?restaurantId=
     public List<MenuCategory> getRestaurantMenuCategories(@RequestParam Long restaurantId) {
         return menuCategoryService.getAllMenuCategories(restaurantId);
+    }
+
+    @PostMapping()
+    public void addMenuCategory(@RequestBody MenuCategory menuCategory) {
+        menuCategoryService.addMenuCategory(menuCategory);
     }
 
 }

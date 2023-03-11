@@ -1,5 +1,7 @@
 package com.firsteat.firsteat.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.firsteat.firsteat.model.Item;
@@ -16,8 +18,12 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
     
-    public Item getItem(String name) {
-        return itemRepository.findById(name).orElseThrow(() -> new EntityNotFoundException());
+    public Item getItem(Long id) {
+        return itemRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+    }
+
+    public List<Item> getAllCategoryItems(Long menuCategoryId) {
+        return itemRepository.findByMenuCategoryId(menuCategoryId);
     }
 
     public void addItem(Item item) {
@@ -28,8 +34,8 @@ public class ItemService {
         itemRepository.save(item);
     }
 
-    public void deleteItem(String name) {
-        itemRepository.deleteById(name);
+    public void deleteItem(Long id) {
+        itemRepository.deleteById(id);
     }
 
 }

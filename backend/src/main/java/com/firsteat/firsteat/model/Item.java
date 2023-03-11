@@ -21,7 +21,7 @@ public class Item {
 
     private int price; // could use BigDecimal instead
 
-    private String imageURL;
+    private String imageURL; // could use java url
 
     private String description;
     
