@@ -3,7 +3,8 @@ package com.firsteat.firsteat.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
@@ -28,8 +29,8 @@ public class Restaurant {
     private String address;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
     @JoinColumn(name = "user_id")
+    @JsonProperty(access = Access.WRITE_ONLY)
     private User user; // owner/vendor
 
     private String photo; // could use java's url instead (?)
@@ -57,14 +58,14 @@ public class Restaurant {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.user = new User(userId, "", "", "");
+        this.user = new User(userId);
     }
 
     public Restaurant(String name, String address, Long userId, List<String> cuisines) {
         super();
         this.name = name;
         this.address = address;
-        this.user = new User(userId, "", "", "");
+        this.user = new User(userId);
         this.cuisines = cuisines;
     }
 
