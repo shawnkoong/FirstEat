@@ -3,6 +3,7 @@ package com.firsteat.firsteat.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,9 @@ public class MenuCategoryController {
     private MenuCategoryService menuCategoryService;
 
     @GetMapping("/{id}") // /api/menuCategory?id=
-    public MenuCategory getMenuCategory(@PathVariable Long id) {
-        return menuCategoryService.getMenuCategory(id);
+    public ResponseEntity<MenuCategory> getMenuCategory(@PathVariable Long id) {
+        MenuCategory menuCategory = menuCategoryService.getMenuCategory(id);
+        return ResponseEntity.ok(menuCategory);
     }
     
     @GetMapping() // /api/menuCategory?restaurantId=

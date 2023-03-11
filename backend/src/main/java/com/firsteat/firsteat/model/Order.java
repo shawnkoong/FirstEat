@@ -12,24 +12,33 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="orders")
+@Table(name = "orders")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int totalPrice;
+
+    private int totalPrice; // same as Item, can use BigDecimal
+
     @ManyToOne
     private Restaurant restaurant;
+
+    /*
+     * can get rid of @ElementCollection and do something similar to relationship
+     * between Restaurant and MenuCategory
+     */
     @ElementCollection
     @CollectionTable(name = "ordered_items")
     private List<Item> itemsOrdered;
+
     @ElementCollection
     @CollectionTable(name = "ordered_quantities")
     private List<Integer> quantityOrdered;
+
     @ManyToOne
     private User user;
-    
+
     public Order() {
     }
 
@@ -37,7 +46,7 @@ public class Order {
         super();
         this.id = id;
         this.totalPrice = 0;
-        this.restaurant = new Restaurant(restaurantId, "", "", 2L);
+        this.restaurant = new Restaurant(restaurantId);
     }
 
     public Long getId() {

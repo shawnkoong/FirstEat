@@ -23,14 +23,22 @@ public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String username; //should get rid of username to make things simpler (ie no duplicate usernames) and only use email
+    
     private String password;
+
     @Column(unique = true)
     private String email;
+    
     @Enumerated(EnumType.STRING)
     private Role role;
 
     public User() {
+    }
+
+    public User(Long id) {
+        this.id = id;
     }
 
     public User(String username, String password, String email, Role role) {
@@ -41,7 +49,6 @@ public class User implements UserDetails{
     }
 
     public User(Long id, String username, String password, String email) {
-        super();
         this.id = id;
         this.username = username;
         this.password = password;
