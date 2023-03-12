@@ -7,8 +7,6 @@ import List from "../components/List/List";
 import Map from "../components/Map/Map";
 
 const MapPage = () => {
-    const [restaurantsRapid, setRestaurantsRapid] = useState([]);
-  const [restaurantsServer, setRestaurantsServer] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState({});
@@ -25,20 +23,14 @@ const MapPage = () => {
   useEffect(() => {
     if (bounds.sw) {
       setLoading(true);
-    //   Promise.all([getRestaurants(), getRapidApiData()]).then((data) => {
-    //     setRestaurants(data?.filter((restaurant) => restaurant.address));
-    //     setLoading(false);
-    //   });
-        // getRestaurants().then((response) => {
-        //     setRestaurantsServer(response.data);
-        // }).then(getRapidApiData(bounds.sw, bounds.ne)).then((data) => {
-        //     setRestaurantsRapid(data?.filter((restaurant) => restaurant.address));
-        // }).then(setLoading(false));
-        getRestaurants().then((response) => {
-            console.log(response);
-            setRestaurants(response.data);
-            setLoading(false);
-        });
+      Promise.all([
+        getRestaurants(),
+        getRapidApiData(bounds.sw, bounds.ne),
+      ]).then((data) => {
+        const restaurants = [...data[0], ...data[1]];
+        setRestaurants(restaurants);
+        setLoading(false);
+      });
     }
   }, [bounds]);
 

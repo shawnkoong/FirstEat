@@ -11,7 +11,7 @@ const RestaurantPage = (restaurant) => {
       <Card>
         <CardMedia
           image="https://media-cdn.grubhub.com/image/upload/d_search:browse-images:default.jpg/w_1200,q_auto:low,fl_lossy,dpr_2.0,c_fill,f_auto,h_300,g_auto/zsiqlpzzlnn9oimcdmig"
-          title="banner image"
+          title={restaurant.name}
           sx={{ width: "100%", height: "200px", objectFit: "cover" }}
         />
       </Card>
