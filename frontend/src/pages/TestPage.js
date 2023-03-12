@@ -1,39 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { getRestaurants } from '../api/server';
-import { Grid } from '@mui/material';
-import RestaurantDetails from '../components/RestaurantDetails/RestaurantDetails';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { getRestaurants } from "../api/server";
+import { Box, Card, CardMedia, Container, Grid } from "@mui/material";
+import RestaurantDetails from "../components/RestaurantDetails/RestaurantDetails";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import NavBar from "../components/NavBar/NavBar";
+import RestaurantNameCard from "../components/RestaurantNameCard/RestaurantNameCard";
+import Menu from "../components/Menu/Menu";
 
 export const TestPage = () => {
-
-    const [restaurants, setRestaurants] = useState([]);
-    const { token } = useSelector(state => state.auth);
-
-    useEffect(() => {
-        try {
-            getRestaurants().then((response) => {
-                console.log(response?.data);
-                setRestaurants(response?.data);
-                console.log(token);
-                console.log(axios)
-            })
-        } catch (error) {
-            console.log(error);
-            console.log(token);
-        }
-    }, [])
-
-    return (
-        <div>
-            testing...
-            <div>
-                {restaurants?.map((restaurant, i) => (
-                    <Grid item key={i} xs={12}>
-                        <RestaurantDetails restaurant={restaurant} />
-                    </Grid>
-                ))}
-            </div>
-        </div>
-    )
-}
+  return (
+    <>
+      <NavBar />
+      <Card>
+        <CardMedia
+          image="https://media-cdn.grubhub.com/image/upload/d_search:browse-images:default.jpg/w_1200,q_auto:low,fl_lossy,dpr_2.0,c_fill,f_auto,h_300,g_auto/zsiqlpzzlnn9oimcdmig"
+          title="banner image"
+          sx={{ width: "100%", height: "200px", objectFit: "cover" }}
+        />
+      </Card>
+      <Container>
+        <RestaurantNameCard />
+        <Menu />
+      </Container>
+    </>
+  );
+};

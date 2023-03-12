@@ -11,8 +11,8 @@ const ProfileDropdown = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(logoutToken);
-    dispatch(logout);
+    dispatch(logoutToken());
+    dispatch(logout());
     navigate("/");
   }
 

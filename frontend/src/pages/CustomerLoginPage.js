@@ -28,7 +28,7 @@ export const CustomerLoginPage = () => {
     const demoLogin = async (e) => {
         e.preventDefault();
         try {
-            await login(dispatch, { username: "demo", password: "password"});
+            await login(dispatch, { username: "DemoCustomer", password: "password"});
             navigate("/test");
         } catch (error) {
             console.log(error);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Paper, TextField, Button } from "@mui/material";
+import { Container, Paper, TextField, Button, Box } from "@mui/material";
 import { registerCustomer } from "../api/server";
 
 export const CreateCustomerPage = () => {
@@ -21,55 +21,57 @@ export const CreateCustomerPage = () => {
         sx={{ padding: "50px 20px", width: 600, margin: "20px auto" }}
       >
         <h1>Create New Account</h1>
-        <Paper elevation={5}>
-          <form className="NewAccountForm" autoComplete="off">
-            <TextField
-              id="outlined-basic"
-              label="Username"
-              fullWidth
-              variant="outlined"
-              required
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <TextField
-              id="outlined-basic"
-              label="E-mail"
-              fullWidth
-              variant="outlined"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Password"
-              fullWidth
-              variant="outlined"
-              required
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Confirm Password"
-              fullWidth
-              variant="outlined"
-              required
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <Button
-              variant="contained"
-              disabled={!passwordMatch || !password || !username}
-              onClick={registerCustomer({ username, password, email })}
-            >
-              Submit
-            </Button>
-          </form>
-        </Paper>
+        <Box autoComplete="off" sx={{}}>
+          <TextField
+            id="outlined-basic"
+            label="Username"
+            fullWidth
+            variant="outlined"
+            required
+            margin="normal"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <TextField
+            id="outlined-basic"
+            label="E-mail"
+            fullWidth
+            variant="outlined"
+            required
+            margin="normal"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Password"
+            fullWidth
+            variant="outlined"
+            required
+            margin="normal"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Confirm Password"
+            fullWidth
+            variant="outlined"
+            required
+            margin="normal"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <Button
+            variant="contained"
+            disabled={!passwordMatch || !password || !username}
+            onClick={registerCustomer({ username, password, email })}
+          >
+            Submit
+          </Button>
+        </Box>
       </Paper>
     </Container>
   );
