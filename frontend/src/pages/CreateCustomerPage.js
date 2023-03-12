@@ -21,7 +21,7 @@ export const CreateCustomerPage = () => {
         sx={{ padding: "50px 20px", width: 600, margin: "20px auto" }}
       >
         <h1>Create New Account</h1>
-        <Box autoComplete="off" sx={{}}>
+        <Box autoComplete="off" component="form">
           <TextField
             id="outlined-basic"
             label="Username"
