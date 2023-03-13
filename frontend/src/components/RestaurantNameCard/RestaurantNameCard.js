@@ -6,8 +6,8 @@ import PhoneIcon from "@mui/icons-material/Phone";
 const RestaurantNameCard = ( restaurant ) => {
 
     return (
-        <Box sx={{display: 'flex', flexDirection: 'column'}}>
-            <Typography variant="h4" fontWeight="bold">
+        <Box marginTop="10px" sx={{display: 'flex', flexDirection: 'column'}}>
+            <Typography variant="h4" fontWeight="bold" gutterBottom>
                 BushFire
             </Typography>
             <Typography variant="subtitle1" color="GrayText">
