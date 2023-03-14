@@ -1,5 +1,6 @@
 import { Box, Modal, Typography, Button } from "@mui/material";
-import React from "react";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from 'react-redux';
 
 const style = {
   position: "absolute",
@@ -13,8 +14,12 @@ const style = {
   p: 4,
 };
 
-const ItemCardModal = ({open, handleClose}) => {
-    console.log(open)
+const ItemCardModal = () => {
+  const dispatch = useDispatch(); // to use with cart reducer to add items to cart
+  const selectedItem = useSelector(state => state.menu.selectedItem);
+
+  // add quantity and add to cart button
+
   return (
     <Modal
       open={open}
@@ -24,10 +29,10 @@ const ItemCardModal = ({open, handleClose}) => {
     >
       <Box sx={style}>
         <Typography variant="h6" component="h2">
-          Text in a modal
+          {selectedItem.name}
         </Typography>
         <Typography sx={{ mt: 2 }}>
-          Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          {selectedItem.description}
         </Typography>
       </Box>
     </Modal>

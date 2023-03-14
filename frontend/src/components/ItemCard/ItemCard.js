@@ -7,22 +7,20 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { selectItem } from "../../store/menuReducer";
 import ItemCardModal from "./ItemCardModal";
 
 // similar to RestaurantDetails component to be used in the RestaurantPage
 const ItemCard = ({ item }) => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
-  const handleOpen = () => {
-    setModalOpen(true);
-  };
-
-  const handleClose = () => {
-    setModalOpen(false);
-  };
+  const handleClick = () => {
+    dispatch(selectItem(item)); // deciding between item or item.id
+  }
 
   return (
-    <Card variant="outlined" onClick={handleOpen}>
+    <Card variant="outlined" onClick={handleClick}>
       <CardActionArea>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
           <CardMedia
@@ -49,32 +47,9 @@ const ItemCard = ({ item }) => {
             </Typography>
           </CardContent>
         </Box>
-        <ItemCardModal open={modalOpen} handleClose={handleClose}/>
       </CardActionArea>
     </Card>
   );
 };
 
 export default ItemCard;
-
-// import React from 'react';
-// import { useDispatch } from 'react-redux';
-// import { selectItem } from './menuSlice';
-
-// function ItemCard({ item }) {
-//   const dispatch = useDispatch();
-
-//   const handleClick = () => {
-//     dispatch(selectItem(item.id));
-//   };
-
-//   return (
-//     <div onClick={handleClick}>
-//       <h2>{item.name}</h2>
-//       <p>{item.description}</p>
-//       <p>{item.price}</p>
-//     </div>
-//   );
-// }
-
-// export default ItemCard;

@@ -2,7 +2,7 @@ import { Box, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
 import ItemCard from "../ItemCard/ItemCard";
 
-const Menu = () => {
+const Menu = ({ menu }) => {
   const menu = [
     {
       id: 1,
@@ -48,6 +48,8 @@ const Menu = () => {
     },
   ];
 
+  const [selectedItem, setSelectedItem] = useState(null);
+
   return (
     <Box display="flex" flexDirection="column" width="100%">
       {menu &&
@@ -65,8 +67,46 @@ const Menu = () => {
             </Grid>
           </Box>
         ))}
+        {selectedItem}
     </Box>
   );
 };
 
 export default Menu;
+
+
+// import React, { useState } from 'react';
+// import { useSelector } from 'react-redux';
+// import ItemCard from './ItemCard';
+// import ItemModal from './ItemModal';
+
+// function App() {
+//   const [selectedItemId, setSelectedItemId] = useState(null);
+//   const items = useSelector((state) => state.menu.items);
+
+//   const handleItemCardClick = (itemId) => {
+//     setSelectedItemId(itemId);
+//   };
+
+//   const handleModalClose = () => {
+//     setSelectedItemId(null);
+//   };
+
+//   const selectedItems = items.filter((item) => item.id === selectedItemId);
+
+//   return (
+//     <div>
+//       <h1>Menu</h1>
+//       <div>
+//         {items.map((item) => (
+//           <ItemCard key={item.id} item={item} onClick={handleItemCardClick} />
+//         ))}
+//       </div>
+//       {selectedItems.length > 0 && (
+//         <ItemModal item={selectedItems[0]} onClose={handleModalClose} />
+//       )}
+//     </div>
+//   );
+// }
+
+// export default App;
