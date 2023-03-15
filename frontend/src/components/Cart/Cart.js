@@ -4,27 +4,13 @@ import { Box, Button, Typography } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 
 const Cart = () => {
-  const items = [
-    {
-      id: 1,
-      img: "https://images.pexels.com/photos/845798/pexels-photo-845798.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "Pineapple Pizza",
-      description: "Pineapple Pizza",
-      price: 20,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      img: "https://images.pexels.com/photos/1256875/pexels-photo-1256875.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "Alfredo Pasta",
-      description: "Creamy",
-      price: 17,
-      quantity: 1,
-    },
-  ];
-  // const items = useSelector(state => state.cart.items)
 
-  const handleCheckout = () => {};
+  const items = useSelector(state => state.cart.items);
+  const subTotal = useSelector(state => state.cart.totalPrice);
+
+  const handleCheckout = () => {
+    // implement
+  };
 
   return (
     <Box
@@ -53,8 +39,8 @@ const Cart = () => {
           }}
         >
           <img
-            src={item.img}
-            alt=""
+            src={item.imageURL}
+            alt={item.name}
             width="100px"
             height="100px"
             object-fit="cover"
@@ -63,11 +49,8 @@ const Cart = () => {
             <Typography variant="h5" color={"black"}>
               {item.title}
             </Typography>
-            <Typography variant="p" color={"gray"}>
-              {item.description.substring(0, 100)}
-            </Typography>
             <Typography variant="h6" color={"blue"}>
-              {item.quantity} x ${item.price}
+              {item.quantity} x ${(item.price / 100).toFixed(2)}
             </Typography>
           </Box>
           <ClearIcon sx={{ color: "red", cursor: "pointer" }} />
@@ -84,7 +67,7 @@ const Cart = () => {
         }}
       >
         <span>SUBTOTAL:</span>
-        <span>$100</span>
+        <span>${subTotal}</span>
       </Box>
       <Button
         onClick={handleCheckout}

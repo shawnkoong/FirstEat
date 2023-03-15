@@ -11,12 +11,14 @@ const Menu = () => {
       name: "Burgers",
       items: [
         {
+          id: 1,
           name: "All American Burger",
           price: 1550,
           imageURL: "https://media-cdn.grubhub.com/image/upload/d_search:browse-images:default.jpg/w_150,q_auto:low,fl_lossy,dpr_2.0,c_fill,f_auto,h_130,g_auto/iuycs3t4hhqhrcpgbs6k",
           description: "1/2 pound beef patty with bacon",
         },
         {
+          id: 2,
           name: "Vegetarian Burger",
           price: 1325,
           imageURL: "https://media-cdn.grubhub.com/image/upload/d_search:browse-images:default.jpg/w_150,q_auto:low,fl_lossy,dpr_2.0,c_fill,f_auto,h_130,g_auto/hnkdgs6ngddtxalavisy",
@@ -29,6 +31,7 @@ const Menu = () => {
       name: "Sides",
       items: [
         {
+          id: 3,
           name: "French Fries",
           price: 450,
           imageURL: "https://media-cdn.grubhub.com/image/upload/d_search:browse-images:default.jpg/w_150,q_auto:low,fl_lossy,dpr_2.0,c_fill,f_auto,h_130,g_auto/bi3fpbx095wza1dhaehh",
@@ -41,6 +44,7 @@ const Menu = () => {
       name: "Drinks",
       items: [
         {
+          id: 4,
           name: "Lemonade",
           price: 450,
           imageURL: "https://media-cdn.grubhub.com/image/upload/d_search:browse-images:default.jpg/w_150,q_auto:low,fl_lossy,dpr_2.0,c_fill,f_auto,h_130,g_auto/umyblufptefc1gsjv9oh",
@@ -54,7 +58,7 @@ const Menu = () => {
     <Box display="flex" flexDirection="column" width="100%">
       {menu &&
         menu.map((category, i) => (
-          <Box marginY="15px">
+          <Box marginY="15px" key={i}>
             <Typography variant="h5" fontWeight="bold" gutterBottom>{category.name}</Typography>
             <Grid container spacing={2}>
               {category.items.map((menuItem, j) => (

@@ -34,6 +34,7 @@ const ItemCard = ({ item }) => {
             title={item.name}
           />
           <CardContent>
+            <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%'}}>
             <Typography
               varaint="h5"
               fontWeight="bold"
@@ -45,6 +46,11 @@ const ItemCard = ({ item }) => {
             <Typography variant="body" fontSize={16}>
               {item.description}
             </Typography>
+            <br/>
+            <Typography variant="body" fontSize={16}>
+              $ {(item.price / 100).toFixed(2)}
+            </Typography>
+            </Box>
           </CardContent>
         </Box>
       </CardActionArea>
