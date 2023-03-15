@@ -1,12 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Box, Button, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Button, IconButton, Typography } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
+import { removeItem, resetCart } from "../../store/cartReducer";
 
 const Cart = () => {
-
-  const items = useSelector(state => state.cart.items);
-  const subTotal = useSelector(state => state.cart.totalPrice);
+  const items = useSelector((state) => state.cart.items);
+  const subTotal = useSelector((state) => state.cart.totalPriceString);
+  const dispatch = useDispatch();
 
   const handleCheckout = () => {
     // implement
@@ -22,7 +23,7 @@ const Cart = () => {
         padding: "20px",
         bgcolor: "white",
         boxShadow: "0px 0px 7px -5px rgba(0, 0, 0, 0.5)",
-        '&:hover': {cursor: 'pointer'}
+        "&:hover": { cursor: "pointer" },
       }}
     >
       <Typography variant="h3" sx={{ color: "black" }}>
@@ -34,8 +35,9 @@ const Cart = () => {
           sx={{
             display: "flex",
             alignItems: "center",
+            justifyContent: "flex-start",
             gap: "20px",
-            marginBottom: "30px",
+            height: "125px",
           }}
         >
           <img
@@ -45,15 +47,28 @@ const Cart = () => {
             height="100px"
             object-fit="cover"
           />
-          <Box sx={{ alignContent: 'space-between', justifyContent: 'space-between' }}>
-            <Typography variant="h5" color={"black"}>
-              {item.title}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              height: "75%",
+            }}
+          >
+            <Typography variant="h6" color={"black"} gutterBottom>
+              {item.name}
             </Typography>
-            <Typography variant="h6" color={"blue"}>
+            <Typography variant="subtitle1" color={"blue"}>
               {item.quantity} x ${(item.price / 100).toFixed(2)}
             </Typography>
           </Box>
-          <ClearIcon sx={{ color: "red", cursor: "pointer" }} />
+          <IconButton
+            aria-label="remove"
+            onClick={() => dispatch(removeItem(item))}
+            sx={{ ml: "auto" }}
+          >
+            <ClearIcon sx={{ color: "red", cursor: "pointer" }} />
+          </IconButton>
         </Box>
       ))}
       <Box
@@ -80,18 +95,16 @@ const Cart = () => {
           color: "white",
           mb: "20px",
           bgcolor: "#0d47a1",
-          '&hover': {
+          "&hover": {
             backgroundColor: "#29b6f6",
           },
-          p: "10px"
+          p: "10px",
         }}
       >
         CHECKOUT
       </Button>
-      <Box sx={{ color: "red", cursor: "pointer", fontSize: "12px"}}>
-        <span>
-          Empty Cart
-        </span>
+      <Box sx={{ color: "red", cursor: "pointer", fontSize: "12px" }}>
+        <span onClick={() => dispatch(resetCart())}>Empty Cart</span>
       </Box>
     </Box>
   );

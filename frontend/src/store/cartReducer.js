@@ -1,3 +1,4 @@
+import { private_excludeVariablesFromRoot } from "@mui/material";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -5,6 +6,7 @@ const initialState = {
   items: [],
   totalCount: 0,
   totalPrice: 0,
+  totalPriceString: "0.00",
 };
 
 export const cartSlice = createSlice({
@@ -19,7 +21,9 @@ export const cartSlice = createSlice({
         (item) => item.id === action.payload.item.id
       );
       state.totalCount += quantity;
-      state.totalPrice += (newItem.price * quantity).toFixed(2); // fix price calculation and int to string
+      const price = Number((newItem.price / 100 * quantity).toFixed(2)); // fix price calculation and int to string
+      state.totalPrice += price;
+      state.totalPriceString = state.totalPrice.toFixed(2);
       if (!cartItem) {
         state.items.push({ ...newItem, quantity: quantity });
       } else {
@@ -27,15 +31,21 @@ export const cartSlice = createSlice({
       }
     },
     removeItem: (state, action) => {
-      state.items = state.items.filter(
-        (item) => item.id !== action.payload.item.id
+      const removeItem = state.items.find(
+        (item) => item.id === action.payload.id
       );
-      state.totalCount--;
+      state.items = state.items.filter(
+        (item) => item.id !== action.payload.id
+      );
+      state.totalPrice -= (Number(removeItem.price) / 100 * removeItem.quantity);
+      state.totalPriceString = state.totalPrice.toFixed(2);
+      state.totalCount -= removeItem.quantity;
     },
     resetCart: (state) => {
       state.items = [];
       state.totalCount = 0;
       state.totalPrice = 0;
+      state.totalPriceString = "0.00";
     },
   },
 });

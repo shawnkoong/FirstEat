@@ -92,11 +92,11 @@ const ItemCardModal = () => {
               </Typography>
             </CardContent>
             <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-              <IconButton aria-label="previous" onClick={remove}>
+              <IconButton aria-label="remove" onClick={remove}>
                 <RemoveIcon />
               </IconButton>
               <Typography mx={2}>{quantity}</Typography>
-              <IconButton aria-label="next" onClick={add}>
+              <IconButton aria-label="add" onClick={add}>
                 <AddIcon />
               </IconButton>
             </Box>
