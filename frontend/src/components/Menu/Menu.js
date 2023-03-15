@@ -1,8 +1,10 @@
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
+import { useSelector } from "react-redux";
 import ItemCard from "../ItemCard/ItemCard";
+import ItemCardModal from "../ItemCard/ItemCardModal";
 
-const Menu = ({ menu }) => {
+const Menu = () => {
   const menu = [
     {
       id: 1,
@@ -48,8 +50,6 @@ const Menu = ({ menu }) => {
     },
   ];
 
-  const [selectedItem, setSelectedItem] = useState(null);
-
   return (
     <Box display="flex" flexDirection="column" width="100%">
       {menu &&
@@ -67,7 +67,7 @@ const Menu = ({ menu }) => {
             </Grid>
           </Box>
         ))}
-        {selectedItem}
+        <ItemCardModal />
     </Box>
   );
 };
