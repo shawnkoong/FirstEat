@@ -9,6 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -25,12 +28,12 @@ public class Order {
     @ManyToOne
     private Restaurant restaurant;
 
-    /*
-     * can get rid of @ElementCollection and do something similar to relationship
-     * between Restaurant and MenuCategory
-     */
-    @ElementCollection
-    @CollectionTable(name = "ordered_items")
+    @ManyToMany
+    @JoinTable(
+        name = "order_item", 
+        joinColumns = @JoinColumn(name = "order_id"), 
+        inverseJoinColumns = @JoinColumn(name = "item_id")
+    )
     private List<Item> itemsOrdered;
 
     @ElementCollection
