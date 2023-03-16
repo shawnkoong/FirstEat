@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.firsteat.firsteat.model.Item;
 import com.firsteat.firsteat.model.Order;
 import com.firsteat.firsteat.repository.OrderRepository;
 

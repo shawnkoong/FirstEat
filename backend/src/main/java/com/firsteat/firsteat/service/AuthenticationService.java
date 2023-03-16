@@ -23,7 +23,6 @@ import com.firsteat.firsteat.model.User;
 @Service
 public class AuthenticationService {
 
-
     private final UserService userService;
 
     private final PasswordEncoder passwordEncoder;
@@ -32,7 +31,8 @@ public class AuthenticationService {
 
     private final JwtEncoder encoder;
 
-    public AuthenticationService(UserService userService, PasswordEncoder passwordEncoder, AuthenticationManager authManager, JwtEncoder encoder) {
+    public AuthenticationService(UserService userService, PasswordEncoder passwordEncoder,
+            AuthenticationManager authManager, JwtEncoder encoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.authManager = authManager;
@@ -41,11 +41,10 @@ public class AuthenticationService {
 
     public AuthenticationResponse registerCustomer(RegisterRequest request) {
         User user = new User(
-            request.getUsername(),
-            passwordEncoder.encode(request.getPassword()),
-            request.getEmail(),
-            Role.ROLE_CUSTOMER
-        );
+                request.getUsername(),
+                passwordEncoder.encode(request.getPassword()),
+                request.getEmail(),
+                Role.ROLE_CUSTOMER);
         userService.addUser(user);
         String token = generateToken(user);
         return new AuthenticationResponse(token, user);
@@ -53,11 +52,10 @@ public class AuthenticationService {
 
     public AuthenticationResponse registerVendor(RegisterRequest request) {
         User user = new User(
-            request.getUsername(),
-            passwordEncoder.encode(request.getPassword()),
-            request.getEmail(),
-            Role.ROLE_VENDOR
-        );
+                request.getUsername(),
+                passwordEncoder.encode(request.getPassword()),
+                request.getEmail(),
+                Role.ROLE_VENDOR);
         userService.addUser(user);
         String token = generateToken(user);
         return new AuthenticationResponse(token, user);
@@ -65,8 +63,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse login(LoginRequest request) {
         authManager.authenticate(
-            new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
-        );
+                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         User user = userService.getUserWithUsername(request.getUsername());
         String token = generateToken(user);
         return new AuthenticationResponse(token, user);
@@ -75,15 +72,15 @@ public class AuthenticationService {
     public String generateToken(UserDetails userDetails) {
         Instant now = Instant.now();
         String scope = userDetails.getAuthorities().stream()
-                    .map(GrantedAuthority::getAuthority)
-                    .collect(Collectors.joining(" "));
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(" "));
         JwtClaimsSet claims = JwtClaimsSet.builder()
-                    .issuer("self")
-                    .issuedAt(now)
-                    .expiresAt(now.plus(24, ChronoUnit.HOURS))
-                    .subject(userDetails.getUsername())
-                    .claim("scope", scope)
-                    .build();
+                .issuer("self")
+                .issuedAt(now)
+                .expiresAt(now.plus(24, ChronoUnit.HOURS))
+                .subject(userDetails.getUsername())
+                .claim("scope", scope)
+                .build();
         return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
 
