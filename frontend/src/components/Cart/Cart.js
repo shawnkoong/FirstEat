@@ -3,14 +3,45 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { removeItem, resetCart } from "../../store/cartReducer";
+import { checkout } from "../../api/server";
 
 const Cart = () => {
   const items = useSelector((state) => state.cart.items);
-  const subTotal = useSelector((state) => state.cart.totalPriceString);
+  const subTotal = useSelector((state) => state.cart.totalPrice);
+  const subTotalString = useSelector((state) => state.cart.totalPriceString);
+  const restaurantId = useSelector((state) => state.cart.restaurantId);
+  const userId = useSelector((state) => state.user.currentUser.id);
   const dispatch = useDispatch();
 
+  const getItemsFromCart = () => {
+    return items.map((item) => {
+      const { id, ...rest } = item;
+      return {id};
+    });
+  };
+
+  // not sure if there is a way to simultaneously assign both the itemCopy and quantity
+  const getQuantityFromCart = () => {
+    return items.map((item) => {
+      const { quantity, ...itemCopy } = item;
+      return quantity;
+    });
+  };
+
   const handleCheckout = () => {
-    // implement
+    const order = {
+      totalPrice: subTotal * 100, // totalPrice is stored as int where 1 is 1 cent. subject to change to BigDecimal
+      restaurant: {
+        id: restaurantId,
+      },
+      user: {
+        id: userId,
+      },
+      itemsOrdered: getItemsFromCart(), // list of items ordered. quantity should be removed and added to quantityOrdered
+      quantityOrdered: getQuantityFromCart(),
+    };
+    console.log(order);
+    checkout(dispatch, order);
   };
 
   return (
@@ -82,7 +113,7 @@ const Cart = () => {
         }}
       >
         <span>SUBTOTAL:</span>
-        <span>${subTotal}</span>
+        <span>${subTotalString}</span>
       </Box>
       <Button
         onClick={handleCheckout}

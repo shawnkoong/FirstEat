@@ -31,24 +31,28 @@ const style = {
 };
 
 const ItemCardModal = () => {
-  const dispatch = useDispatch(); // to use with cart reducer to add items to cart
+  const dispatch = useDispatch();
   const selected = useSelector((state) => state.menu.selected);
   const selectedItem = useSelector((state) => state.menu.selectedItem);
   const quantity = useSelector((state) => state.menu.quantity);
 
+  // closes the item modal
   const handleClose = (e) => {
     e.stopPropagation();
     dispatch(closeModal());
   };
 
+  // increments the quantity of item
   const add = () => {
     dispatch(addQuantity());
   };
 
+  // decrements the quantity of item
   const remove = () => {
     dispatch(removeQuantity());
   };
 
+  // adds item to cart
   const addToCart = () => {
     dispatch(addItem({ item: selectedItem, quantity: quantity }));
     dispatch(closeModal());

@@ -7,6 +7,7 @@ const initialState = {
   totalCount: 0,
   totalPrice: 0,
   totalPriceString: "0.00",
+  restaurantId: null,
 };
 
 export const cartSlice = createSlice({
@@ -18,10 +19,10 @@ export const cartSlice = createSlice({
       const quantity = action.payload.quantity;
       const newItem = action.payload.item;
       const cartItem = state.items.find(
-        (item) => item.id === action.payload.item.id
+        (item) => item.id === newItem.id
       );
       state.totalCount += quantity;
-      const price = Number((newItem.price / 100 * quantity).toFixed(2)); // fix price calculation and int to string
+      const price = Number(((newItem.price / 100) * quantity).toFixed(2));
       state.totalPrice += price;
       state.totalPriceString = state.totalPrice.toFixed(2);
       if (!cartItem) {
@@ -34,10 +35,9 @@ export const cartSlice = createSlice({
       const removeItem = state.items.find(
         (item) => item.id === action.payload.id
       );
-      state.items = state.items.filter(
-        (item) => item.id !== action.payload.id
-      );
-      state.totalPrice -= (Number(removeItem.price) / 100 * removeItem.quantity);
+      state.items = state.items.filter((item) => item.id !== action.payload.id);
+      state.totalPrice -=
+        (Number(removeItem.price) / 100) * removeItem.quantity;
       state.totalPriceString = state.totalPrice.toFixed(2);
       state.totalCount -= removeItem.quantity;
     },
@@ -47,9 +47,21 @@ export const cartSlice = createSlice({
       state.totalPrice = 0;
       state.totalPriceString = "0.00";
     },
+    setRestaurantId: (state, action) => {
+      state.restaurantId = action.payload;
+    },
+    unsetRestaurantId: (state) => {
+      state.restaurantId = null;
+    },
   },
 });
 
-export const { addItem, removeItem, resetCart } = cartSlice.actions;
+export const {
+  addItem,
+  removeItem,
+  resetCart,
+  setRestaurantId,
+  unsetRestaurantId,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

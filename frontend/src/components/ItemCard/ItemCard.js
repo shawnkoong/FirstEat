@@ -14,6 +14,7 @@ import ItemCardModal from "./ItemCardModal";
 // similar to RestaurantDetails component to be used in the RestaurantPage
 const ItemCard = ({ item }) => {
   const dispatch = useDispatch();
+  item.id = item.id.toString();
 
   const handleClick = () => {
     dispatch(selectItem(item)); // deciding between item or item.id
