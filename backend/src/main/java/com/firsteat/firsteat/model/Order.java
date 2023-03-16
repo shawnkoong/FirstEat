@@ -1,5 +1,6 @@
 package com.firsteat.firsteat.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CollectionTable;
@@ -40,6 +41,8 @@ public class Order {
     private User user;
 
     public Order() {
+        this.itemsOrdered = new ArrayList<>();
+        this.quantityOrdered = new ArrayList<>();
     }
 
     public Order(Long id, Long restaurantId) {
