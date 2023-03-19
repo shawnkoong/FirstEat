@@ -19,7 +19,7 @@ const NavBar = () => {
   }));
 
   return (
-    <AppBar position="static" height="80px">
+    <AppBar position="fixed" height="80px">
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h5">FirstEat</Typography>
         <IconWrapper>
