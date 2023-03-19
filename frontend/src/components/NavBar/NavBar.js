@@ -6,11 +6,13 @@ import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import Cart from "../Cart/Cart";
 import { useSelector } from "react-redux";
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const cartCount = useSelector((state) => state.cart.totalCount);
+  const navigate = useNavigate();
 
   const IconWrapper = styled("div")(({ theme }) => ({
     display: "flex",
@@ -21,7 +23,7 @@ const NavBar = () => {
   return (
     <AppBar position="fixed" height="80px">
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h5">FirstEat</Typography>
+        <Typography variant="h5" component="span" onClick={navigate("/home")}>FirstEat</Typography>
         <IconWrapper>
           <Badge badgeContent={cartCount} color="error">
             <ShoppingBasketIcon

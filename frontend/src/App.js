@@ -8,6 +8,7 @@ import RestaurantPage from "./pages/RestaurantPage";
 import { HomePage } from "./pages/HomePage";
 
 import './App.css'
+import CustomerMainPage from "./pages/CustomerMainPage";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Route exact path="/" element={<HomePage />} />
       <Route exact path="/register-customer" element={<CreateCustomerPage />} />
       <Route element={<PrivateRoutes />}>
+        <Route exact path="/home" element={<CustomerMainPage />} />
         <Route exact path="/map" element={<MapPage />} />
         <Route exact path="/test" element={<TestPage />} />
         <Route exact path="/restaurants/:id" element={<RestaurantPage />} />
