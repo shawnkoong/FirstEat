@@ -33,7 +33,7 @@ public class Restaurant {
     @JsonProperty(access = Access.WRITE_ONLY)
     private User user; // owner/vendor
 
-    private String photo; // could use java's url instead (?)
+    private String imageURL; // could use java's url instead (?)
 
     // add latitude/longitude or somehow get it from the address
     // add rating
@@ -101,12 +101,12 @@ public class Restaurant {
         this.user = user;
     }
 
-    public String getPhoto() {
-        return this.photo;
+    public String getImageURL() {
+        return this.imageURL;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public List<MenuCategory> getMenu() {
