@@ -25,7 +25,7 @@ const RestaurantDetails = ({ restaurant }) => {
       <CardMedia
         style={{ height: 350 }}
         image={
-          restaurant.photo
+          restaurant?.photo
             ? restaurant.photo.images.large.url
             : "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
         }
