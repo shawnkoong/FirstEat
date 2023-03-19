@@ -23,7 +23,7 @@ const NavBar = () => {
   return (
     <AppBar position="fixed" height="80px">
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h5" component="span" onClick={navigate("/home")}>FirstEat</Typography>
+        <Typography variant="h5" >FirstEat</Typography>
         <IconWrapper>
           <Badge badgeContent={cartCount} color="error">
             <ShoppingBasketIcon
