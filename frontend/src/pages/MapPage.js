@@ -11,7 +11,7 @@ const MapPage = () => {
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState({});
   const [loading, setLoading] = useState(false);
-  const [refresh, setRefresh] = useState(true);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(

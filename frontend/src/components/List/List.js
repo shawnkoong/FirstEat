@@ -3,7 +3,7 @@ import { CircularProgress, Box, Grid, Typography } from "@mui/material";
 
 import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
 
-const List = ({ restaurants, loading, child }) => {
+const List = ({ restaurants, loading }) => {
   return (
     <Box sx={{ padding: "25px" }}>
       <Typography variant="h4" paddingBottom={3}>

@@ -10,7 +10,7 @@ const Map = ({
   restaurants,
 }) => {
   const media = useMediaQuery("(min-width:600px)");
-  restaurants.filter((restaurant) => restaurant.latitude);
+  const filtered = restaurants.filter((restaurant) => restaurant.latitude);
 
   return (
     <Box sx={{ height: "85vh", width: "100%" }}>
@@ -27,7 +27,7 @@ const Map = ({
         }}
       >
         {restaurants &&
-          restaurants.map((restaurant, i) => (
+          filtered.map((restaurant, i) => (
             <Box
               lat={Number(restaurant.latitude)}
               lng={Number(restaurant.longitude)}

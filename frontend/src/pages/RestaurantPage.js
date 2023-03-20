@@ -9,10 +9,18 @@ import {
   setRestaurantId,
   unsetRestaurantId,
 } from "../store/cartReducer";
+import { useLocation } from "react-router-dom";
 
-const RestaurantPage = (restaurant) => {
+const RestaurantPage = () => {
   const dispatch = useDispatch();
-  
+  const location = useLocation();
+  const restaurant = location.state.restaurant;
+  console.log({restaurant})
+
+  /**
+   * when a user leaves from this page, the cart resets. This prevents users from being bale to order
+   *  from multiple restaurants, since this feature has not been implemented
+   */
   const handleUnload = useCallback(
     (e) => {
       dispatch(unsetRestaurantId());
@@ -23,7 +31,7 @@ const RestaurantPage = (restaurant) => {
 
   useEffect(() => {
     dispatch(setRestaurantId(restaurant.id));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     window.addEventListener("beforeunload", handleUnload);
@@ -32,19 +40,20 @@ const RestaurantPage = (restaurant) => {
     };
   }, [handleUnload]);
 
+  // could add scroll to top functionality later
   return (
     <>
       <NavBar />
       <Card>
         <CardMedia
-          image={restaurant.photo}
+          image={restaurant.imageURL}
           title={restaurant.name}
           sx={{ width: "100%", height: "200px", objectFit: "cover" }}
         />
       </Card>
       <Container>
         <RestaurantNameCard />
-        <Menu />
+        <Menu menu={restaurant.menu}/>
       </Container>
     </>
   );
