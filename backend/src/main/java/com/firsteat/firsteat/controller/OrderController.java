@@ -1,5 +1,6 @@
 package com.firsteat.firsteat.controller;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,13 +31,20 @@ public class OrderController {
 
     @PostMapping()
     public void processOrder(@RequestBody Order order) {
+        order.timestampNow();
         orderService.addOrder(order);
     }
 
     // method to get all of a user's orders
-    @GetMapping("/")
-    public List<Order> getUserOrders() {
-        return new ArrayList<>();
+    // need to get time zone information from client
+    @GetMapping("/user/${userId}")
+    public List<Order> getUserOrders(@PathVariable Long userId) {
+        List<Order> orders = orderService.getAllCustomerOrders(userId);
+        ZoneId zoneId = ZoneId.systemDefault(); // change this with client's time zone
+        for (Order order : orders) {
+            order.setClientTime(order.getTimestamp().atZone(zoneId));
+        }
+        return orders;
     }
 
     // method to get all of a restaurant's orders

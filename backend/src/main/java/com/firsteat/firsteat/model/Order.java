@@ -1,5 +1,7 @@
 package com.firsteat.firsteat.model;
 
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,11 +45,15 @@ public class Order {
     @ManyToOne
     private User user;
 
+    private Instant timestamp;
+
+    private ZonedDateTime clientTime;
+
     public Order() {
         this.itemsOrdered = new ArrayList<>();
         this.quantityOrdered = new ArrayList<>();
     }
-
+    
     public Order(Long id, Long restaurantId) {
         super();
         this.id = id;
@@ -55,52 +61,72 @@ public class Order {
         this.restaurant = new Restaurant(restaurantId);
     }
 
+    public void timestampNow() {
+        setTimestamp(Instant.now());
+    }
+    
     public Long getId() {
         return this.id;
     }
-
+    
     public void setId(Long id) {
         this.id = id;
     }
-
+    
     public int getTotalPrice() {
         return this.totalPrice;
     }
-
+    
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
-
+    
     public Restaurant getRestaurant() {
         return this.restaurant;
     }
-
+    
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
     }
-
+    
     public User getUser() {
         return this.user;
     }
-
+    
     public void setUser(User user) {
         this.user = user;
     }
-
+    
     public List<Item> getItemsOrdered() {
         return this.itemsOrdered;
     }
-
+    
     public void setItemsOrdered(List<Item> itemsOrdered) {
         this.itemsOrdered = itemsOrdered;
     }
-
+    
     public List<Integer> getQuantityOrdered() {
         return this.quantityOrdered;
     }
-
+    
     public void setQuantityOrdered(List<Integer> quantityOrdered) {
         this.quantityOrdered = quantityOrdered;
     }
+    
+    public Instant getTimestamp() {
+        return this.timestamp;
+    }
+    
+    public void setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp;
+    }
 
+    public ZonedDateTime getClientTime() {
+        return this.clientTime;
+    }
+
+    public void setClientTime(ZonedDateTime clientTime) {
+        this.clientTime = clientTime;
+    }
+    
 }

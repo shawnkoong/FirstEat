@@ -26,7 +26,7 @@ public class OrderService {
         return orderRepository.findByRestaurantId(restaurantId);
     }
 
-    public List<Order> getAllCustomeOrders(Long userId) {
+    public List<Order> getAllCustomerOrders(Long userId) {
         return orderRepository.findByUserId(userId);
     }
 
