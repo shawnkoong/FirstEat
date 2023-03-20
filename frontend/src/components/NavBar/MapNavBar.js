@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Autocomplete, LoadScript } from "@react-google-maps/api";
 import { AppBar, Toolbar, Typography, InputBase, Badge } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
-import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import SearchIcon from "@mui/icons-material/Search";
-import Cart from "../Cart/Cart";
-import { useSelector } from "react-redux";
+import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 
 const LIBRARIES = ["geometry", "drawing", "places"];
 
@@ -58,8 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const MapNavBar = ({ setCoordinates }) => {
   const [autocomplete, setAutocomplete] = useState(null);
-  const [cartOpen, setCartOpen] = useState(false);
-  const cartCount = useSelector((state) => state.cart.totalCount);
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const onLoad = (autoCompPlace) => setAutocomplete(autoCompPlace);
 
@@ -74,9 +72,6 @@ const MapNavBar = ({ setCoordinates }) => {
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h5">FirstEat</Typography>
         <SearchWrapper>
-          <Badge badgeContent={cartCount} color="error">
-            <ShoppingBasketIcon onClick={() => setCartOpen(!cartOpen)} />
-          </Badge>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -90,9 +85,12 @@ const MapNavBar = ({ setCoordinates }) => {
               </Autocomplete>
             </LoadScript>
           </Search>
+
+            <AccountCircleRoundedIcon onClick={() => setProfileOpen(!profileOpen)} />
+
         </SearchWrapper>
       </Toolbar>
-      {cartOpen && <Cart />}
+      {profileOpen && <ProfileDropdown />}
     </AppBar>
   );
 };
