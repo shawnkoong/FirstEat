@@ -52,9 +52,19 @@ export const getRestaurants = async () => {
 
 export const checkout = async (dispatch, order) => {
   try {
-    await axiosInstance.post(`/orders`, order)
+    await axiosInstance.post(`/orders`, order);
     // clearing the cart after checking out
     dispatch(resetCart());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserOrders = async (userId) => {
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  try {
+    const response = await axiosInstance.get(`/orders/${userId}?timeZone=` + timeZone);
+    return response.data;
   } catch (error) {
     console.log(error);
   }

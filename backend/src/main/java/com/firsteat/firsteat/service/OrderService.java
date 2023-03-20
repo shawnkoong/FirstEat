@@ -1,5 +1,6 @@
 package com.firsteat.firsteat.service;
 
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -26,8 +27,13 @@ public class OrderService {
         return orderRepository.findByRestaurantId(restaurantId);
     }
 
-    public List<Order> getAllCustomerOrders(Long userId) {
-        return orderRepository.findByUserId(userId);
+    public List<Order> getAllCustomerOrders(Long userId, String timeZone) {
+        List<Order> orders = orderRepository.findByUserId(userId);
+        ZoneId zoneId = ZoneId.of(timeZone);
+        for (Order order : orders) {
+            order.setClientTime(order.getTimestamp().atZone(zoneId));
+        }
+        return orders;
     }
 
     public void addOrder(Order order) {
