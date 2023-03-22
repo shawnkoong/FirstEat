@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +20,6 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "orders")
@@ -32,9 +32,16 @@ public class Order {
     private int totalPrice; // same as Item, can use BigDecimal
 
     @ManyToOne
+    @JsonProperty(access = Access.WRITE_ONLY)
     private Restaurant restaurant;
 
+    private String restaurantName;
+
+    @Column(name = "rid")
+    private Long restaurantId;
+
     @ManyToMany
+    @JsonProperty(access = Access.READ_ONLY)
     @JoinTable(
         name = "order_item", 
         joinColumns = @JoinColumn(name = "order_id"), 
@@ -47,13 +54,10 @@ public class Order {
     private List<Integer> quantityOrdered;
 
     @ManyToOne
+    @JsonProperty(access = Access.WRITE_ONLY)
     private User user;
 
-    @JsonProperty(access = Access.WRITE_ONLY)
     private Instant timestamp;
-
-    @Transient
-    private ZonedDateTime clientTime;
 
     public Order() {
         this.itemsOrdered = new ArrayList<>();
@@ -69,6 +73,11 @@ public class Order {
 
     public void timestampNow() {
         setTimestamp(Instant.now());
+    }
+
+    public void setRestaurantInfo() {
+        setRestaurantId(restaurant.getId());
+        setRestaurantName(restaurant.getName());
     }
     
     public Long getId() {
@@ -127,12 +136,20 @@ public class Order {
         this.timestamp = timestamp;
     }
 
-    public ZonedDateTime getClientTime() {
-        return this.clientTime;
+    public String getRestaurantName() {
+        return this.restaurantName;
     }
 
-    public void setClientTime(ZonedDateTime clientTime) {
-        this.clientTime = clientTime;
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
+    public Long getRestaurantId() {
+        return this.restaurantId;
+    }
+
+    public void setRestaurantId(Long restaurantId) {
+        this.restaurantId = restaurantId;
     }
     
 }

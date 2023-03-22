@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.firsteat.firsteat.model.Order;
@@ -31,15 +30,13 @@ public class OrderController {
 
     @PostMapping()
     public void processOrder(@RequestBody Order order) {
-        order.timestampNow();
         orderService.addOrder(order);
     }
 
     // method to get all of a user's orders
-    // need to get time zone information from client
-    @GetMapping("/user/${userId}")
-    public List<Order> getUserOrders(@PathVariable Long userId, @RequestParam("timeZone") String timeZone) {
-        return orderService.getAllCustomerOrders(userId, timeZone);
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Order>> getUserOrders(@PathVariable Long userId) {
+        return ResponseEntity.ok(orderService.getAllCustomerOrders(userId));
     }
 
     // method to get all of a restaurant's orders
