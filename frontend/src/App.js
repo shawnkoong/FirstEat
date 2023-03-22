@@ -9,6 +9,7 @@ import { HomePage } from "./pages/HomePage";
 
 import './App.css'
 import CustomerMainPage from "./pages/CustomerMainPage";
+import { UserOrdersPage } from "./pages/UserOrdersPage";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route exact path="/map" element={<MapPage />} />
         <Route exact path="/test" element={<TestPage />} />
         <Route exact path="/restaurant/:id" element={<RestaurantPage />} />
+        <Route exact path="/orders" element={<UserOrdersPage />} />
       </Route>
     </Routes>
   );

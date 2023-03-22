@@ -61,9 +61,8 @@ export const checkout = async (dispatch, order) => {
 };
 
 export const getUserOrders = async (userId) => {
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   try {
-    const response = await axiosInstance.get(`/orders/${userId}?timeZone=` + timeZone);
+    const response = await axiosInstance.get(`/orders/${userId}`);
     return response.data;
   } catch (error) {
     console.log(error);

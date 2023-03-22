@@ -15,7 +15,7 @@ const Cart = () => {
 
   const getItemsFromCart = () => {
     return items.map((item) => {
-      const { id, ...rest } = item;
+      const { id } = item;
       return {id};
     });
   };
@@ -23,7 +23,7 @@ const Cart = () => {
   // not sure if there is a way to simultaneously assign both the itemCopy and quantity
   const getQuantityFromCart = () => {
     return items.map((item) => {
-      const { quantity, ...itemCopy } = item;
+      const { quantity } = item;
       return quantity;
     });
   };
@@ -40,7 +40,6 @@ const Cart = () => {
       itemsOrdered: getItemsFromCart(), // list of items ordered. quantity should be removed and added to quantityOrdered
       quantityOrdered: getQuantityFromCart(),
     };
-    console.log(order);
     checkout(dispatch, order);
   };
 
