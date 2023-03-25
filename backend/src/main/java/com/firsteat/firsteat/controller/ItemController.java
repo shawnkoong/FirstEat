@@ -1,5 +1,7 @@
 package com.firsteat.firsteat.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +15,7 @@ import com.firsteat.firsteat.model.Item;
 import com.firsteat.firsteat.service.ItemService;
 
 @RestController
-@RequestMapping("/api/item")
+@RequestMapping("/api/items")
 public class ItemController {
     
     @Autowired
@@ -28,5 +30,10 @@ public class ItemController {
     @PostMapping()
     public void addItem(@RequestBody Item item) {
         itemService.addItem(item);
+    }
+
+    @GetMapping()
+    public List<Item> getAllItems() {
+        return itemService.getAllItems();
     }
 }

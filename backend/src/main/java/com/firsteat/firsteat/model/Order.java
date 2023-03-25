@@ -1,7 +1,6 @@
 package com.firsteat.firsteat.model;
 
 import java.time.Instant;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +40,6 @@ public class Order {
     private Long restaurantId;
 
     @ManyToMany
-    @JsonProperty(access = Access.READ_ONLY)
     @JoinTable(
         name = "order_item", 
         joinColumns = @JoinColumn(name = "order_id"), 

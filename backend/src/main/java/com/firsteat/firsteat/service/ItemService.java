@@ -38,4 +38,8 @@ public class ItemService {
         itemRepository.deleteById(id);
     }
 
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
+
 }
