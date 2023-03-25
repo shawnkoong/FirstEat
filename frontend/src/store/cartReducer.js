@@ -8,6 +8,7 @@ const initialState = {
   totalPrice: 0,
   totalPriceString: "0.00",
   restaurantId: null,
+  restaurantName: null,
 };
 
 export const cartSlice = createSlice({
@@ -53,6 +54,12 @@ export const cartSlice = createSlice({
     unsetRestaurantId: (state) => {
       state.restaurantId = null;
     },
+    setRestaurantName: (state, action) => {
+      state.restaurantName = action.payload;
+    },
+    unsetRestaurantName: (state) => {
+      state.restaurantName = null;
+    },
   },
 });
 
@@ -62,6 +69,8 @@ export const {
   resetCart,
   setRestaurantId,
   unsetRestaurantId,
+  setRestaurantName,
+  unsetRestaurantName
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

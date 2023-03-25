@@ -62,7 +62,7 @@ export const checkout = async (dispatch, order) => {
 
 export const getUserOrders = async (userId) => {
   try {
-    const response = await axiosInstance.get(`/orders/${userId}`);
+    const response = await axiosInstance.get(`/orders/user/${userId}`);
     return response.data;
   } catch (error) {
     console.log(error);

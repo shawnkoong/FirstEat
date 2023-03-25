@@ -10,15 +10,9 @@ const Cart = () => {
   const subTotal = useSelector((state) => state.cart.totalPrice);
   const subTotalString = useSelector((state) => state.cart.totalPriceString);
   const restaurantId = useSelector((state) => state.cart.restaurantId);
+  const restaurantName = useSelector((state) => state.cart.restaurantName);
   const userId = useSelector((state) => state.user.currentUser.id);
   const dispatch = useDispatch();
-
-  const getItemsFromCart = () => {
-    return items.map((item) => {
-      const { id } = item;
-      return {id};
-    });
-  };
 
   // not sure if there is a way to simultaneously assign both the itemCopy and quantity
   const getQuantityFromCart = () => {
@@ -33,11 +27,12 @@ const Cart = () => {
       totalPrice: subTotal * 100, // totalPrice is stored as int where 1 is 1 cent. subject to change to BigDecimal
       restaurant: {
         id: restaurantId,
+        name: restaurantName,
       },
       user: {
         id: userId,
       },
-      itemsOrdered: getItemsFromCart(), // list of items ordered. quantity should be removed and added to quantityOrdered
+      itemsOrdered: items,
       quantityOrdered: getQuantityFromCart(),
     };
     checkout(dispatch, order);

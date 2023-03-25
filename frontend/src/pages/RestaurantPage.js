@@ -8,6 +8,8 @@ import {
   resetCart,
   setRestaurantId,
   unsetRestaurantId,
+  setRestaurantName,
+  unsetRestaurantName
 } from "../store/cartReducer";
 import { useLocation } from "react-router-dom";
 
@@ -24,6 +26,7 @@ const RestaurantPage = () => {
   const handleUnload = useCallback(
     (e) => {
       dispatch(unsetRestaurantId());
+      dispatch(unsetRestaurantName());
       dispatch(resetCart());
     },
     [dispatch]
@@ -31,6 +34,7 @@ const RestaurantPage = () => {
 
   useEffect(() => {
     dispatch(setRestaurantId(restaurant.id));
+    dispatch(setRestaurantName(restaurant.name));
   }, [dispatch]);
 
   useEffect(() => {

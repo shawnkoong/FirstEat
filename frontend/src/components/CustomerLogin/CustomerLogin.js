@@ -15,7 +15,7 @@ export const CustomerLogin = () => {
     e.preventDefault();
     try {
       await login(dispatch, { username, password });
-      navigate("/test");
+      navigate("/map");
     } catch (error) {
       console.log(error);
     }
@@ -25,7 +25,7 @@ export const CustomerLogin = () => {
     e.preventDefault();
     try {
       await login(dispatch, { username: "DemoCustomer", password: "password" });
-      navigate("/test");
+      navigate("/map");
     } catch (error) {
       console.log(error);
     }
