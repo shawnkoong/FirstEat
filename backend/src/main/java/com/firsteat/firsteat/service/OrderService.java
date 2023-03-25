@@ -2,6 +2,8 @@ package com.firsteat.firsteat.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.firsteat.firsteat.model.Order;
@@ -28,6 +30,15 @@ public class OrderService {
 
     public List<Order> getAllCustomerOrders(Long userId) {
         return orderRepository.findByUserId(userId);
+    }
+
+    /**
+     * @param userId
+     * @return List of 30 most recent orders
+     */
+    public List<Order> getRecentCustomerOrders(Long userId) {
+        Pageable pageable = PageRequest.of(0, 30);
+        return orderRepository.findFirst30ByUserIdOrderByTimestampDesc(userId, pageable);
     }
 
     public void addOrder(Order order) {
