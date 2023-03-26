@@ -3,12 +3,12 @@ import { Box, Typography, Rating } from "@mui/material";
 import LocationOn from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 
-const RestaurantNameCard = ( restaurant ) => {
+const RestaurantNameCard = ( {restaurant} ) => {
 
     return (
         <Box marginTop="10px" sx={{display: 'flex', flexDirection: 'column'}}>
             <Typography variant="h4" fontWeight="bold" gutterBottom>
-                BushFire
+                {restaurant.name}
             </Typography>
             <Typography variant="subtitle1" color="GrayText">
                 <LocationOn/> 32431 Magenta Ct

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Container, Card, CardMedia } from "@mui/material";
 import NavBar from "../components/NavBar/NavBar";
 import RestaurantNameCard from "../components/RestaurantNameCard/RestaurantNameCard";
@@ -9,15 +9,21 @@ import {
   setRestaurantId,
   unsetRestaurantId,
   setRestaurantName,
-  unsetRestaurantName
+  unsetRestaurantName,
 } from "../store/cartReducer";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { getRestaurantById } from "../api/server";
 
 const RestaurantPage = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const location = useLocation();
-  const restaurant = location.state.restaurant;
-  console.log({restaurant})
+  const [restaurant, setRestaurant] = useState(null);
+
+  useEffect(() => {
+    getRestaurantById(id)
+      .then((res) => setRestaurant(res))
+      .catch((error) => console.log(error));
+  }, [id]);
 
   /**
    * when a user leaves from this page, the cart resets. This prevents users from being bale to order
@@ -33,9 +39,11 @@ const RestaurantPage = () => {
   );
 
   useEffect(() => {
-    dispatch(setRestaurantId(restaurant.id));
-    dispatch(setRestaurantName(restaurant.name));
-  }, [dispatch]);
+    if (restaurant) {
+      dispatch(setRestaurantId(restaurant.id));
+      dispatch(setRestaurantName(restaurant.name));
+    }
+  }, [restaurant, dispatch]);
 
   useEffect(() => {
     window.addEventListener("beforeunload", handleUnload);
@@ -48,17 +56,23 @@ const RestaurantPage = () => {
   return (
     <>
       <NavBar />
-      <Card>
-        <CardMedia
-          image={restaurant.imageURL}
-          title={restaurant.name}
-          sx={{ width: "100%", height: "200px", objectFit: "cover" }}
-        />
-      </Card>
-      <Container>
-        <RestaurantNameCard />
-        <Menu menu={restaurant.menu}/>
-      </Container>
+      {restaurant ? (
+        <>
+          <Card>
+            <CardMedia
+              image={restaurant.imageURL}
+              title={restaurant.name}
+              sx={{ width: "100%", height: "200px", objectFit: "cover" }}
+            />
+          </Card>
+          <Container>
+            <RestaurantNameCard restaurant={restaurant}/>
+            <Menu menu={restaurant.menu} />
+          </Container>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </>
   );
 };

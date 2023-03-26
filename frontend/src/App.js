@@ -7,7 +7,7 @@ import { PrivateRoutes } from "./util/PrivateRoutes";
 import RestaurantPage from "./pages/RestaurantPage";
 import { HomePage } from "./pages/HomePage";
 
-import './App.css'
+import "./App.css";
 import CustomerMainPage from "./pages/CustomerMainPage";
 import { UserOrdersPage } from "./pages/UserOrdersPage";
 
@@ -17,6 +17,7 @@ const App = () => {
       <Route exact path="/" element={<HomePage />} />
       <Route exact path="/register-customer" element={<CreateCustomerPage />} />
       <Route element={<PrivateRoutes />}>
+        <Route exact path="/orders" element={<UserOrdersPage />} />
         <Route exact path="/home" element={<CustomerMainPage />} />
         <Route exact path="/map" element={<MapPage />} />
         <Route exact path="/test" element={<TestPage />} />

@@ -50,6 +50,15 @@ export const getRestaurants = async () => {
   }
 };
 
+export const getRestaurantById = async (restaurantId) => {
+  try {
+    const response = await axiosInstance.get(`/restaurants/${restaurantId}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export const checkout = async (dispatch, order) => {
   try {
     await axiosInstance.post(`/orders`, order);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Typography,
@@ -27,7 +27,7 @@ const RestaurantDetails = ({ restaurant }) => {
 
   const handleClick = () => {
     if (restaurant.menu) {
-      navigate(`/restaurant/${restaurant.id}`, { state: { restaurant } });
+      navigate(`/restaurant/${restaurant.id}`);
     } else {
       // choose a better way to display information below
       alert(
@@ -39,7 +39,6 @@ const RestaurantDetails = ({ restaurant }) => {
   return (
     <>
       <Card elevation={5}>
-        {/* replace test link with /restaurants/:id */}
         <CardActionArea onClick={handleClick}>
           <CardMedia
             style={{ height: 350 }}
