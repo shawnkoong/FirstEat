@@ -36,7 +36,7 @@ public class OrderController {
     // method to get all of a user's orders
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Order>> getUserOrders(@PathVariable Long userId) {
-        return ResponseEntity.ok(orderService.getAllCustomerOrders(userId));
+        return ResponseEntity.ok(orderService.getRecentCustomerOrders(userId));
     }
 
     // method to get all of a restaurant's orders
