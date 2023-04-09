@@ -21,12 +21,11 @@ import com.firsteat.firsteat.repository.UserRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
+    @InjectMocks
+    private UserService userService;
 
     @Mock
     private UserRepository userRepository;
-
-    @InjectMocks
-    private UserService userService;
 
     @BeforeEach
     public void setUp() {
