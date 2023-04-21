@@ -2,7 +2,7 @@ import axios from "axios";
 import { store } from "../store/store";
 
 // // change for deployment
-const URL_PREFIX = "http://localhost:8080/api";
+const URL_PREFIX = "https://firsteat.up.railway.app/api";
 
 const axiosInstance = axios.create({
   baseURL: URL_PREFIX,
