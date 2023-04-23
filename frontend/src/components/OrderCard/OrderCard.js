@@ -1,5 +1,5 @@
-import { Box, Divider, Paper, Typography } from "@mui/material";
 import React from "react";
+import { Box, Divider, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const OrderCard = ({ order }) => {
@@ -8,8 +8,9 @@ const OrderCard = ({ order }) => {
   const localTime = `${
     timestamp.getMonth() + 1
   }/${timestamp.getDate()}/${timestamp.getFullYear()} ${
-    timestamp.getHours() % 12 == 0 ? 12 : timestamp.getHours() % 12
+    timestamp.getHours() % 12 === 0 ? 12 : timestamp.getHours() % 12
   }:${timestamp.getMinutes()} ${timestamp.getHours() >= 12 ? "PM" : "AM"}`;
+
   return (
     <Paper elevation={2}>
       <Box display="flex" width="100%">
@@ -47,7 +48,5 @@ const OrderCard = ({ order }) => {
     </Paper>
   );
 };
-
-// navigate(`/restaurant/${restaurant.id}`, { state: { restaurant } }); use something like this to navigate to restaurant page
 
 export default OrderCard;

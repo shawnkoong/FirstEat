@@ -1,11 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Box, Grid, Typography } from "@mui/material";
 import { CustomerLogin } from "../components/CustomerLogin/CustomerLogin";
 
 export const HomePage = () => {
-  const navigate = useNavigate();
-
   return (
     <Grid container>
       <Grid item xs={12} md={6}>
@@ -17,7 +14,7 @@ export const HomePage = () => {
         />
       </Grid>
       <Grid item xs={12} md={6}>
-        <Box display="flex" flexDirection="column" justifyContent='end'>
+        <Box display="flex" flexDirection="column" justifyContent="end">
           <Box display="flex" justifyContent="center" mt={20}>
             <Typography variant="h2" fontWeight="5">
               Order the best, wherever you go
@@ -28,7 +25,7 @@ export const HomePage = () => {
               display: "flex",
               justifyContent: "center",
               alignContent: "center",
-              marginTop: 10
+              marginTop: 10,
             }}
           >
             <CustomerLogin />

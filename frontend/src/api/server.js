@@ -1,4 +1,3 @@
-import axios from "axios";
 import { loginStart, loginSuccess, loginFailure } from "../store/userReducer";
 import { setToken } from "../store/authReducer";
 import axiosInstance from "./axiosInstance";
@@ -57,7 +56,7 @@ export const getRestaurantById = async (restaurantId) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const checkout = async (dispatch, order) => {
   try {

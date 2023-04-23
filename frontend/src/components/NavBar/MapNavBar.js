@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Autocomplete, LoadScript } from "@react-google-maps/api";
-import { AppBar, Toolbar, Typography, InputBase, Badge } from "@mui/material";
+import { AppBar, Toolbar, Typography, InputBase } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
@@ -86,8 +86,9 @@ const MapNavBar = ({ setCoordinates }) => {
             </LoadScript>
           </Search>
 
-            <AccountCircleRoundedIcon onClick={() => setProfileOpen(!profileOpen)} />
-
+          <AccountCircleRoundedIcon
+            onClick={() => setProfileOpen(!profileOpen)}
+          />
         </SearchWrapper>
       </Toolbar>
       {profileOpen && <ProfileDropdown />}

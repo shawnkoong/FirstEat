@@ -1,4 +1,3 @@
-import { private_excludeVariablesFromRoot } from "@mui/material";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -19,9 +18,7 @@ export const cartSlice = createSlice({
       // action := {...item, quantity}
       const quantity = action.payload.quantity;
       const newItem = action.payload.item;
-      const cartItem = state.items.find(
-        (item) => item.id === newItem.id
-      );
+      const cartItem = state.items.find((item) => item.id === newItem.id);
       state.totalCount += quantity;
       const price = Number(((newItem.price / 100) * quantity).toFixed(2));
       state.totalPrice += price;
@@ -70,7 +67,7 @@ export const {
   setRestaurantId,
   unsetRestaurantId,
   setRestaurantName,
-  unsetRestaurantName
+  unsetRestaurantName,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

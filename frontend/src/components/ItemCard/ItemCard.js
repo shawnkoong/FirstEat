@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Card,
@@ -6,10 +7,8 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { selectItem } from "../../store/menuReducer";
-import ItemCardModal from "./ItemCardModal";
 
 // similar to RestaurantDetails component to be used in the RestaurantPage
 const ItemCard = ({ item }) => {
@@ -18,7 +17,7 @@ const ItemCard = ({ item }) => {
 
   const handleClick = () => {
     dispatch(selectItem(item)); // deciding between item or item.id
-  }
+  };
 
   return (
     <Card variant="outlined" onClick={handleClick}>
@@ -35,22 +34,29 @@ const ItemCard = ({ item }) => {
             title={item.name}
           />
           <CardContent>
-            <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%'}}>
-            <Typography
-              varaint="h5"
-              fontWeight="bold"
-              fontSize={20}
-              gutterBottom
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                height: "100%",
+              }}
             >
-              {item.name}
-            </Typography>
-            <Typography variant="body" fontSize={16}>
-              {item.description}
-            </Typography>
-            <br/>
-            <Typography variant="body" fontSize={16}>
-              $ {(item.price / 100).toFixed(2)}
-            </Typography>
+              <Typography
+                varaint="h5"
+                fontWeight="bold"
+                fontSize={20}
+                gutterBottom
+              >
+                {item.name}
+              </Typography>
+              <Typography variant="body" fontSize={16}>
+                {item.description}
+              </Typography>
+              <br />
+              <Typography variant="body" fontSize={16}>
+                $ {(item.price / 100).toFixed(2)}
+              </Typography>
             </Box>
           </CardContent>
         </Box>

@@ -92,14 +92,14 @@ export const CustomerLogin = () => {
             >
               Sign In as Demo User
             </Button>
-            <Button
+            {/* <Button
               variant="contained"
               size="small"
               onClick={demoLoginVendor}
               disabled={isFetching}
             >
               Sign In as Demo Vendor
-            </Button>
+            </Button> */}
           </Box>
         </Box>
       </Paper>
