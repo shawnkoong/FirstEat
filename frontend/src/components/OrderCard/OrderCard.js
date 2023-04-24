@@ -1,18 +1,24 @@
 import React from "react";
-import { Box, Divider, Paper, Typography } from "@mui/material";
+import { Box, Button, Divider, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import OrderDetailModal from "./OrderDetailModal";
 import { useDispatch } from "react-redux";
 import { selectOrder } from "../../store/orderReducer";
+import { useNavigate } from "react-router-dom";
+import { resetCart, addItem } from "../../store/cartReducer";
 
+/**
+ * used to display individual orders for the purpose of showing a user's order history
+ * @param {object} order - the order to display
+ */
 const OrderCard = ({ order }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const timestamp = new Date(order.timestamp);
   const firstFourItems = order.itemsOrdered.slice(0, 4);
   const firstFourQuantity = order.quantityOrdered.slice(0, 4);
   const hiddenCount = order.itemsOrdered.length - firstFourItems.length;
 
-  console.log(order);
   const localTime = `${
     timestamp.getMonth() + 1
   }/${timestamp.getDate()}/${timestamp.getFullYear()} ${
@@ -21,6 +27,14 @@ const OrderCard = ({ order }) => {
 
   const handleClick = () => {
     dispatch(selectOrder(order));
+  };
+
+  const handleOrderAgain = () => {
+    dispatch(resetCart());
+    order.quantityOrdered.forEach((quantity, i) => {
+      dispatch(addItem({ item: order.itemsOrdered[i], quantity: quantity }));
+    });
+    navigate(`/restaurant/${order.restaurantId}`);
   };
 
   return (
@@ -58,13 +72,21 @@ const OrderCard = ({ order }) => {
                     color="gray"
                     sx={{ textDecoration: "underline", cursor: "pointer" }}
                   >
-                    + {hiddenCount} more
+                    ... and +{hiddenCount} more
                   </Typography>
                 </div>
               )}
             </Box>
           </Box>
-          <Box display="flex" width="30%">
+          <Box
+            display="flex"
+            flexDirection="column-reverse"
+            alignItems="center"
+            width="30%"
+            p={1}
+          >
+            <Button onClick={handleOrderAgain}>Order Again</Button>
+            <Button onClick={handleClick}>View Order Detail</Button>
             <div>box 2</div>
           </Box>
         </Box>

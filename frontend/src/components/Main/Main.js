@@ -33,7 +33,6 @@ const Main = () => {
       // });
       getRapidApiData(bounds.sw, bounds.ne).then((data) => {
         //setting data and removing parts of the response that is not a restaurant
-        console.log(data);
         setRestaurants(data?.filter((restaurant) => restaurant.address));
         setLoading(false);
       });
@@ -58,11 +57,7 @@ const Main = () => {
       <MapNavBar setCoordinates={setCoordinates} />
       <Grid container spacing={3} style={{ width: "100%" }}>
         <Grid item xs={12} md={4}>
-          <List
-            restaurants={restaurants}
-            loading={loading}
-            child={child}
-          />
+          <List restaurants={restaurants} loading={loading} child={child} />
         </Grid>
         <Grid
           item

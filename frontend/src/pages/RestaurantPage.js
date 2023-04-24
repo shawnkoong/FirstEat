@@ -26,7 +26,7 @@ const RestaurantPage = () => {
   }, [id]);
 
   /**
-   * when a user leaves from this page, the cart resets. This prevents users from being bale to order
+   * when a user leaves from this page, the cart resets. This prevents users from being able to order
    *  from multiple restaurants, since this feature has not been implemented
    */
   const handleUnload = useCallback(
@@ -66,7 +66,7 @@ const RestaurantPage = () => {
             />
           </Card>
           <Container>
-            <RestaurantNameCard restaurant={restaurant}/>
+            <RestaurantNameCard restaurant={restaurant} />
             <Menu menu={restaurant.menu} />
           </Container>
         </>
