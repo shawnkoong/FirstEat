@@ -46,12 +46,13 @@ const Cart = () => {
         top: "80px",
         zIndex: 999,
         padding: "20px",
+        maxHeight: "80vh",
+        overflowY: "auto",
         bgcolor: "white",
         boxShadow: "0px 0px 7px -5px rgba(0, 0, 0, 0.5)",
-        "&:hover": { cursor: "pointer" },
       }}
     >
-      <Typography variant="h3" sx={{ color: "black" }}>
+      <Typography variant="h4" sx={{ color: "black" }}>
         Items in your cart
       </Typography>
       {items?.map((item) => (
