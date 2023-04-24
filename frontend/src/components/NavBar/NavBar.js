@@ -16,6 +16,7 @@ const NavBar = () => {
     display: "flex",
     alignItems: "center",
     gap: "25px",
+    cursor: "pointer",
   }));
 
   return (

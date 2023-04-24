@@ -54,7 +54,12 @@ const ItemCard = ({ item }) => {
                 {item.description}
               </Typography>
               <br />
-              <Typography variant="body" fontSize={16}>
+              <Typography
+                variant="body"
+                fontSize={16}
+                display={"flex"}
+                alignItems={"center"}
+              >
                 $ {(item.price / 100).toFixed(2)}
               </Typography>
             </Box>
