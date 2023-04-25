@@ -19,11 +19,14 @@ const OrderCard = ({ order }) => {
   const firstFourQuantity = order.quantityOrdered.slice(0, 4);
   const hiddenCount = order.itemsOrdered.length - firstFourItems.length;
 
+  // format time to MM/DD/YYYY HH:MM AM/PM
   const localTime = `${
     timestamp.getMonth() + 1
   }/${timestamp.getDate()}/${timestamp.getFullYear()} ${
     timestamp.getHours() % 12 === 0 ? 12 : timestamp.getHours() % 12
-  }:${timestamp.getMinutes()} ${timestamp.getHours() >= 12 ? "PM" : "AM"}`;
+  }:${timestamp.getMinutes() < 10 ? "0" : ""}${timestamp.getMinutes()} ${
+    timestamp.getHours() >= 12 ? "PM" : "AM"
+  }`;
 
   const handleClick = () => {
     dispatch(selectOrder(order));
@@ -87,7 +90,6 @@ const OrderCard = ({ order }) => {
           >
             <Button onClick={handleOrderAgain}>Order Again</Button>
             <Button onClick={handleClick}>View Order Detail</Button>
-            <div>box 2</div>
           </Box>
         </Box>
       </Paper>
