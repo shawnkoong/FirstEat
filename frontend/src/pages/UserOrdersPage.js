@@ -14,7 +14,8 @@ export const UserOrdersPage = () => {
   useEffect(() => {
     getUserOrders(userId)
       .then((res) => setOrders(res))
-      .finally(() => setIsLoading(false));
+      .then(() => setIsLoading(false))
+      .catch((err) => console.log(err));
   }, []);
 
   return (

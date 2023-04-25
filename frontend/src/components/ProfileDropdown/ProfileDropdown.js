@@ -29,7 +29,7 @@ const ProfileDropdown = () => {
       }}
     >
       <Grid container direction="column" alignContent="space-around">
-        <Grid item onClick={() => navigate("/profile")}>
+        {/* <Grid item onClick={() => navigate("/profile")}>
           <Typography
             gutterBottom
             variant="subtitle1"
@@ -38,7 +38,7 @@ const ProfileDropdown = () => {
           >
             Profile
           </Typography>
-        </Grid>
+        </Grid> */}
         <Grid item onClick={() => navigate("/orders")}>
           <Typography
             gutterBottom
@@ -59,7 +59,7 @@ const ProfileDropdown = () => {
             Map
           </Typography>
         </Grid>
-        <Grid item>
+        {/* <Grid item>
           <Typography
             gutterBottom
             variant="subtitle1"
@@ -68,7 +68,7 @@ const ProfileDropdown = () => {
           >
             Favorites
           </Typography>
-        </Grid>
+        </Grid> */}
         <Grid item onClick={handleLogout}>
           <Typography
             gutterBottom
