@@ -125,7 +125,9 @@ const Cart = () => {
             backgroundColor: "#29b6f6",
           },
           p: "10px",
+          ":disabled": { backgroundColor: "#cccccc" },
         }}
+        disabled={items.length === 0}
       >
         CHECKOUT
       </Button>
