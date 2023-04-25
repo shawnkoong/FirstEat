@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, Badge, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import Cart from "../Cart/Cart";
 import { useSelector } from "react-redux";
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
@@ -21,6 +22,10 @@ const NavBar = () => {
     cursor: "pointer",
   }));
 
+  const handleGithubClick = () => {
+    window.open("https://github.com/shawnkoong/FirstEat");
+  };
+
   return (
     <AppBar position="sticky" height="80px">
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -28,6 +33,7 @@ const NavBar = () => {
           <Typography variant="h5">FirstEat</Typography>
         </Box>
         <IconWrapper>
+          <GitHubIcon onClick={handleGithubClick} />
           <Badge badgeContent={cartCount} color="error">
             <ShoppingBasketIcon
               onClick={() => {
