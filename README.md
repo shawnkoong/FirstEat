@@ -1,7 +1,7 @@
 # FirstEat
 ![image](assets/DemoScreenshot.png)
 
-[live site](https://firsteat.netlify.app/)
+[live site](https://first-eat.vercel.app/)
 
 Website where users can explore restaurants nearby current location or anywhere, using Google Maps API and RapidAPI. 
 
