@@ -3,11 +3,10 @@
 
 [live site](https://first-eat.vercel.app/)
 
-Website where users can explore restaurants nearby current location or anywhere, using Google Maps API and RapidAPI. 
+Website where users can explore restaurants nearby current location or anywhere, using Google Maps API and RapidAPI for restaurant information. 
+The README is WIP
 
-The goal is to connect to a backend to be able to create users and provide an online ordering service and include other features [in progress].
-
-## Current Dependencies
+## Current Dependencies (front end)
 - [React](https://reactjs.org/)
 - [google-map-react](https://github.com/google-map-react/google-map-react)
 - [@react-google-maps/api](https://react-google-maps-api-docs.netlify.app/)
