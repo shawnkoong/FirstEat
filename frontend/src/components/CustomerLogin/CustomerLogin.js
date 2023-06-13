@@ -9,7 +9,7 @@ export const CustomerLogin = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isFetching, error } = useSelector((state) => state.user);
+  const { isFetching, error, message } = useSelector((state) => state.user);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -70,11 +70,17 @@ export const CustomerLogin = () => {
               >
                 Sign In
               </Button>
-              {error && (
-                <Typography variant="subtitle1" color={"red"}>
-                  Invalid credentials
-                </Typography>
-              )}
+              {error &&
+                (message == "Network Error" ? (
+                  <Typography variant="subtitle2" color={"red"}>
+                    Server Unavailable. The free-tier hosting must have ran
+                    out...
+                  </Typography>
+                ) : (
+                  <Typography variant="subtitle1" color={"red"}>
+                    Invalid credentials
+                  </Typography>
+                ))}
             </Box>
           </form>
           <Box display="flex" alignItems="center">

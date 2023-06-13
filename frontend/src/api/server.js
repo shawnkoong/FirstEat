@@ -16,7 +16,7 @@ export const login = async (dispatch, user) => {
     dispatch(loginSuccess(response.data.user));
     dispatch(setToken(response.data.token));
   } catch (error) {
-    dispatch(loginFailure());
+    dispatch(loginFailure(error.message));
   }
 };
 
